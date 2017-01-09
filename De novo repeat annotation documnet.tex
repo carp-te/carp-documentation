@@ -1,0 +1,268 @@
+% !TeX spellcheck = en_AU
+\documentclass[12pt]{report}
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{color}
+\usepackage{hyperref}
+\graphicspath{ {images/} }
+\usepackage{booktabs}
+%\usepackage[margin=0.5in]{geometry}
+\setlength\parindent{0pt}
+\usepackage{fourier} 
+\usepackage{array}
+\usepackage{makecell}
+
+%%% Change the url link to blue color %%%%%%
+\DeclareUrlCommand{\url}{%
+	\def\UrlFont{\color{blue}\normalfont}%      Adding a little color 
+%	\def\UrlLeft##1\UrlRight{\underline{##1}}%  Underlining the url
+}
+
+\begin{document} \sloppy
+
+\author{Author Name}
+\date{Day Month Year}
+
+%\begin{titlepage}
+%\end{titlepage}
+%\newpage(after introdution, like paper title, uni and name)
+
+\section*{Biogo Command Line Applications User Manual}
+\textbf{Biogo written by: Dan Kortschak} \\
+\textbf{Document organised by: Lu Zeng} \\
+
+Biogo \href{<url>}(\url{https://github.com/biogo/examples/}) is a bioinformatics library for the Go language. Biogo/krishna and Biogo/igor are de-novo repeat family identifying and annotation packages, which employ computational methods for identifying repeat element boundaries and family relationships from sequence data. Biogo assists the runs of krishna and igor given a genomic database and uses the output to build, refine and classify consensus models of putative interspersed repeats. 
+
+\subsection*{{Prerequisites}}
+
+\subsubsection{1. Download Go }
+Available at \href{<url>} (\url{https://golang.org/dl}). Developed and tested with version 1.5.2. \\\\
+\textbf{Install on Linux}: \\
+Unpack the Go language in your home directory or in a location where it may be shared with other users of your system ( ie. /usr/local/).
+
+\begin{enumerate}
+	\item[*] cp go\texttt{\#}.\texttt{\#}.linux-amd64.tar.gz /usr/local/ 
+	\item[*] tar -C /usr/local -xzf go\texttt{\#}.\texttt{\#}.linux-amd64.tar.gz
+	\item[*] export PATH=\texttt{\$}PATH:/usr/local/go/bin
+\end{enumerate}
+
+
+\noindent If you installed Go to your home directory you should add the following commands to \texttt{\$}HOME\texttt{/}.profile. For example, put your go path into a directory called "work":
+
+\begin{enumerate}
+	\item[*] export GOROOT=\texttt{\$}HOME/go
+	\item[*] export GOPATH=\texttt{\$}HOME/work
+	\item[*] export PATH=\texttt{\$}PATH:\texttt{\$}GOROOT/bin
+	
+\end{enumerate}
+
+For more installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page.
+
+
+\subsubsection{2. Git}
+To perform the next step you may have Git installed. (Check that you have a git command before proceeding.) \\
+
+If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
+
+\subsubsection{3. Download Biogo Packages}
+Download krishna and igor packages from github.
+
+\begin{enumerate}
+\item[*] go get github.com/biogo/examples/krishna
+\item[*] go get github.com/biogo/examples/igor
+\item[*] go get github.com/biogo/examples/external
+\end{enumerate}
+
+\subsubsection{4. Install Biogo Packages}
+Install packages from Biogo in you home directory, for example directory called "work".
+\begin{enumerate}
+	\item[*] cd work/src/github.com/biogo/examples/krishna
+	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna-matrix matrix.go
+	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna krishna.go
+	\item[*] cd work/src/github.com/biogo/examples/igor
+	\item[*] go build -o \texttt{\$}HOME/work/bin/igor igor.go
+	\item[*] go build -o \texttt{\$}HOME/work/bin/seqer seqer.go
+\end{enumerate}
+
+\subsubsection{5. Install CENSOR}
+Install censor to screens target genomes against a reference collection of repeats libraries with masking symbols, as well as generating a report classifying all found repeats. CENSOR needs wu-blast and Bioperl.\\
+
+The version is now available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
+
+\subsection*{Example run}
+In this example, human genome were downloaded by chromosomes (24 chromosomes) from UCSC into files called chr-*.fa.\\
+
+\subsubsection{1. Use krishna-matrix to run alignment between human sequences as a matrix, it will run self alignment first, and then run pairwise alignment.}
+
+The default minimum hit length for krishna (-dpid) is 400bp, and minimum hit identity (-dplen) is 94\%. The smaller number of parameters you use, the longer time and bigger memory will be needed. \\
+
+If you want change these parameters, just add "-dplen=*bp" and "-dpid=0.*" in 'matrix.go' under krishna source code: lines 102 and 132 (codes begin with "cmd := exec.Command").\\
+
+Change the work directory that stores temporary files generated from krishna to you own directory (line 64 in matrix.go), Then rebuild 'matrix.go'. \\
+
+\textbf{\textcolor{red}{Notes: You need to rebuild the code every time when you did any changes. }} \\
+
+Now runs the job:
+\begin{enumerate}
+	\item[*] cd /data/rc003/lu/human (directory contains the sequences)
+	\item[*] krishna-matrix chr-*.fa
+\end{enumerate}
+
+\noindent If the genome sequence were very big and consisted by multiple contigs or scaffolds (>200MB), split it into smaller files (using bundle.go).\\
+\begin{enumerate}
+	\item[*] go build -o \texttt{\$}HOME/work/bin/bundle bundle.go
+	\item[*] bundle -bundle 50000000 -in seq.fa
+\end{enumerate}
+
+-bundle: Specifies the sum of sequence length in a bundle. (default 20000000, 20MB).\\
+-in: the genomes sequences need to split.\\
+Then run krishna job.\\
+
+\subsubsection{2. Use igor to take pairwise alignment data produced by krishna, and reports repeat feature family groupings in JSON format.}
+\begin{enumerate}
+	\item[*] cat *.gff \texttt{>} hg\_krishna.gff
+	\item[*] igor -in hg\_krishna.gff -out hg94\_krishna.json
+\end{enumerate}
+
+\subsubsection{3. seqer returns multiple fasta sequences corresponding to feature intervals described in the JSON output from igor.}
+seqer will also produce fastq consensus sequence output from one of MUSCLE or MAFFT. gffer converts the JSON output of igor to gff.
+\begin{enumerate}
+	\item[*] gffer \texttt{<} hg94\_krishna.json \texttt{>} hg94\_krishna.igor.json
+	\item[*] cat chr-*.fa \texttt{>} hg19v37.mfa
+	\item[*] seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94\_krishna.igor.json
+	
+\end{enumerate}
+-fasta: Output consensus as fasta with quality case filtering\\
+-maxFam: maxFam indicates maximum family size considered (0 == no limit).\\
+-minLen: Minimum proportion of longest family member.\\
+-threads: Number of concurrent aligner instances to run.
+
+
+\subsection*{Benchmarks}
+
+\footnotesize  % Switch from 12pt to 11pt; otherwise, table won't fit
+%\setlength\LTleft{-50pt}            % default: \fill
+%\setlength\LTright{-50pt}           % default: \fill
+\setlength\tabcolsep{1.5pt}
+\begin{center}
+	\begin{tabular}{ | c | c | c | c|c|c|c|}
+		\hline
+		\thead{Genome} & \thead{ Krishna Threads } &  \thead{Genome DB \\ Size} & \thead{Krishna run time \\ (hh:mm)} & \thead{Igor run time \\ (hh:mm)} & \thead{Seqer run time \\ (hh:mm)}  \\
+		\hline
+		Human & 4$\sim$8  & 3.0G  & {<}350 & 128:30 & 2:23 \\
+		\hline 
+		Bearded Dragon &  4$\sim$8 & 1.8G &{<}48 &92:40 & {<}4 \\
+		\hline
+		Chicken & 4$\sim$8 & 1017M &{<}24 & {<}4 & {<}1 \\
+		\hline
+		Opossum &  4$\sim$8 & 3.5G & {<}288 &61:48 & 4:52 \\
+		\hline
+		Platypus & 4$\sim$8 & 2.0G & {<}340 & 191:34 & 10:16 \\
+		\hline
+		Echidna & 4$\sim$8 & 1.9G & {<} 360 & 12:43 & 9:02\\
+		\hline
+	\end{tabular}
+\end{center}
+
+* Analysis run on a 512GB RAM, machine running Red Hat Linux
+
+\subsection*{Repeat Library Annotation}
+The previous steps generate the repeat consensus sequences from the human genome, now we are going to annotated these consensus with repeat class.
+\subsection*{Annotate consensus sequences}
+\textbf{\textcolor{red}{Notes: All Jave scripts used here need to specify the directories where your data is and where you want your output in }}
+\subsubsection{1. Annotate consensus sequences with repeat families.}
+Use censor to annotated consensus sequences with Repbase library. 
+\begin{enumerate}
+	\item[*] cd consensus
+	\item[*] cat *.fq \texttt{>} ConsensusSequences.fa 
+	\item[*] censor -bprm cpus=8 -lib $\sim$/Verterbrates.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
+\end{enumerate}
+The censor outputs usually have 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked.  \\
+
+\subsubsection{2. Classify consensus sequences.}
+ConsensusSequences.fa and ConsensusSequences.fa.map were required in this step. You will also need to specify the directories where your data is and where we want your output in the java code, then compile and run it.\\
+\begin{enumerate}
+	\item[*] javac ClassifyConsensusSequences.java
+	\item[*] java ClassifyConsensusSequences
+\end{enumerate}
+You should get 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff.
+
+\subsubsection{3. Filter potential protein sequences.}
+In this step, you will need to run the perl script reportsJ.pl (perl reportsJ.pl). This uses wu-blast blastx, you will also need uniprot database. reportsJ.pl will ask for a list of databases to process, "libs.txt". We need file notknown.fa and notknown.fa.gff, put libs.txt into current directory.
+
+\textbf{\textcolor{red}{Notes: reportsJ.pl contains three parts: used to identify uniprot, GB\_TE, or retroviruses. You can comment other two parts, and run one of each parts separately in the same time, to save the running time.}}
+
+\subsubsection{4. Get proteins information from consensus sequences.}
+Another java program GetProteins.java will be used. It need two input files: notKnown.fa, notKnown.fa.spwb.gff (Generated from previous step).
+\begin{enumerate}
+	\item[*] javac GetProteins.java
+	\item[*] java GetProteins
+\end{enumerate}
+You will get 2 output files: proteins.txt (a list of families that have been identified as proteins and the proteins they have matches);
+notKnownNotProtein.fa (a fasta file of the families that have not yet been classified).
+
+\subsubsection{5. Check simple sequential repeats (SSR).}
+Then check any existence of SSR in the unknown sequences, using phobos.
+\begin{enumerate}
+	\item[*] phobos -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos
+\end{enumerate}
+
+\subsubsection{6. Identify the sequences that are SSRs from the phobos output.}
+The phobos output will be used to identify SSRs: notKnownNotProtein.phobos.
+\begin{enumerate}
+	\item[*] javac IdentifySSRs.java
+	\item[*] java IdentifySSRs
+\end{enumerate}
+You will get a file called: SSR.txt
+
+\subsubsection{7. Generate annotated repeat library.}
+10 input files are require to generate a repeat library: \\
+1. ConsensusSequences.fa \\
+2. ConsensusSequences.fa.map \\
+3. notKnown.fa.tewb.gff \\
+4. notKnown.fa.ervwb.gff \\
+5. protein.txt \\
+6. known.txt \\
+7. GB\_TE.21032016.fa \\
+8. all\_retrovirus.fasta \\
+9. SSR.txt (if you do not have this, leave the definition in, it will cause error messages, but will not stop the program nor effect the results.) \\
+10. LA4v2-satellite.fa (you do not have this, or equivalent, as you didn't have nay satellites, but leave the definition in-it will cause error messages, but will not stop the program nor effect the results.)
+\begin{enumerate}
+	\item[*] javac GenerateAnnotatedLibrary.java
+	\item[*] java GenerateAnnotatedLibrary
+\end{enumerate}
+Then you will get a library called "*\_Library.fasta", you can also change this to whatever you want to call your library
+
+\subsection*{Benchmarks2}
+
+\footnotesize  % Switch from 12pt to 11pt; otherwise, table won't fit
+%\setlength\LTleft{-50pt}            % default: \fill
+%\setlength\LTright{-50pt}           % default: \fill
+\setlength\tabcolsep{1.5pt}
+\begin{center}
+	\begin{tabular}{ | c | c | c | c| c |c|}
+		\hline
+		\thead{Genome}  &  \thead{Consensus sequences size} & \thead{Censor first run \\ time (hh:mm)} & \thead{reportJ.pl \\ (hh:mm)} & \thead{phobos run time \\ (hh:mm)} \\
+		\hline
+		Human & 38M  & 5:14  & 19:30 & {<}00:05\\
+		\hline 
+		Bearded Dragon &  88M & 2:41 & {<} 192  &{<}00:05\\
+		\hline
+		Chicken & 18M & 3:01 &{<}24 & {<}00:05\\
+		\hline
+		Opossum & 60M & 13:17 &{<}48 &{<}01:00 \\
+		\hline
+		Platypus & 162M & 34:34 & {<}192 &{<}01:00 \\
+		\hline
+		Echidna & 59M &36:40& 105:12 & 01:54 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+* Analysis run on a slurm machine with 4$\sim$$\sim$16 cpus, and 8GB RAM, machine running Red Hat Linux.\\
+
+\textbf{\textcolor{blue}{ \Large Finished! Good Luck!!!}}
+
+\end{document}

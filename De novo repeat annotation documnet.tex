@@ -20,6 +20,12 @@
 %	\def\UrlLeft##1\UrlRight{\underline{##1}}%  Underlining the url
 }
 
+\topmargin 0.0cm
+\oddsidemargin 0.2cm
+\textwidth 16cm 
+\textheight 21cm
+\footskip 1.0cm
+
 \begin{document} \sloppy
 
 \author{Author Name}
@@ -29,11 +35,11 @@
 %\end{titlepage}
 %\newpage(after introdution, like paper title, uni and name)
 
-\section*{Biogo Command Line Applications User Manual}
-\textbf{Biogo written by: Dan Kortschak} \\
+\section*{\'biogo Command Line Applications User Manual}
+\textbf{\'biogo written by: Dan Kortschak} \\
 \textbf{Document organised by: Lu Zeng} \\
 
-Biogo \href{<url>}(\url{https://github.com/biogo/examples/}) is a bioinformatics library for the Go language. Biogo/krishna and Biogo/igor are de-novo repeat family identifying and annotation packages, which employ computational methods for identifying repeat element boundaries and family relationships from sequence data. Biogo assists the runs of krishna and igor given a genomic database and uses the output to build, refine and classify consensus models of putative interspersed repeats. 
+\'biogo \href{<url>}(\url{https://github.com/\'biogo/examples/}) is a bioinformatics library for the Go language. \'biogo/krishna and \'biogo/igor are de-novo repeat family identifying and annotation packages, which employ computational methods for identifying repeat element boundaries and family relationships from sequence data. \'biogo assists the runs of krishna and igor given a genomic database and uses the output to build, refine and classify consensus models of putative interspersed repeats. 
 
 \subsection*{{Prerequisites}}
 
@@ -66,22 +72,22 @@ To perform the next step you may have Git installed. (Check that you have a git 
 
 If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
 
-\subsubsection{3. Download Biogo Packages}
+\subsubsection{3. Download \'biogo Packages}
 Download krishna and igor packages from github.
 
 \begin{enumerate}
-\item[*] go get github.com/biogo/examples/krishna
-\item[*] go get github.com/biogo/examples/igor
-\item[*] go get github.com/biogo/examples/external
+\item[*] go get github.com/\'biogo/examples/krishna
+\item[*] go get github.com/\'biogo/examples/igor
+\item[*] go get github.com/\'biogo/examples/external
 \end{enumerate}
 
-\subsubsection{4. Install Biogo Packages}
-Install packages from Biogo in you home directory, for example directory called "work".
+\subsubsection{4. Install \'biogo Packages}
+Install packages from \'biogo in you home directory, for example directory called "work".
 \begin{enumerate}
-	\item[*] cd work/src/github.com/biogo/examples/krishna
+	\item[*] cd work/src/github.com/\'biogo/examples/krishna
 	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna-matrix matrix.go
 	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna krishna.go
-	\item[*] cd work/src/github.com/biogo/examples/igor
+	\item[*] cd work/src/github.com/\'biogo/examples/igor
 	\item[*] go build -o \texttt{\$}HOME/work/bin/igor igor.go
 	\item[*] go build -o \texttt{\$}HOME/work/bin/seqer seqer.go
 \end{enumerate}

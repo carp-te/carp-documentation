@@ -56,31 +56,12 @@
 \subsection*{{Prerequisites}}
 
 \subsubsection{1. Download Go }
-Available at \href{<url>} (\url{https://golang.org/dl}). Developed and tested with version 1.5.2. \\\\
-\textbf{Install on Linux}: \\
-Unpack the Go language in your home directory or in a location where it may be shared with other users of your system ( ie. /usr/local/).
-
-\begin{enumerate}
-	\item[*] cp go\texttt{\#}.\texttt{\#}.linux-amd64.tar.gz /usr/local/ 
-	\item[*] tar -C /usr/local -xzf go\texttt{\#}.\texttt{\#}.linux-amd64.tar.gz
-	\item[*] export PATH=\texttt{\$}PATH:/usr/local/go/bin
-\end{enumerate}
-
-
-\noindent If you installed Go to your home directory you should add the following commands to \texttt{\$}HOME\texttt{/}.profile. For example, put your go path into a directory called "work":
-
-\begin{enumerate}
-	\item[*] export GOROOT=\texttt{\$}HOME/go
-	\item[*] export GOPATH=\texttt{\$}HOME/work
-	\item[*] export PATH=\texttt{\$}PATH:\texttt{\$}GOROOT/bin
-	
-\end{enumerate}
-
-For more installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page.
+Available at \href{<url>} (\url{https://golang.org/dl}). Developed and tested with version 1.5.2. \\
+For installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page.
 
 
 \subsubsection{2. Git}
-To perform the next step you may have Git installed. (Check that you have a git command before proceeding.) \\
+To perform the next step you may want Git to be installed. (Check that you have a git command before proceeding.) \\
 
 If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
 
@@ -88,21 +69,16 @@ If you do not have a working Git installation, follow the instructions on the \h
 Download krishna and igor packages from github.
 
 \begin{enumerate}
-\item[*] go get github.com/\'biogo/examples/krishna
-\item[*] go get github.com/\'biogo/examples/igor
-\item[*] go get github.com/\'biogo/examples/external
+\item[*] go get github.com/biogo/examples/krishna
+\item[*] go get github.com/biogo/examples/igor
+\item[*] go get github.com/biogo/external
 \end{enumerate}
 
-\subsubsection{4. Install \'biogo Packages}
-Install packages from \'biogo in you home directory, for example directory called "work".
+\subsubsection{4. Build \'biogo Packages}
+Usually, when you download package, it will automatically built. However, some may not, so uild packages from \'biogo to you home directory using following command.
 
 \begin{enumerate}
-	\item[*] cd work/src/github.com/\'biogo/examples/krishna
-	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna-matrix matrix.go
-	\item[*] go build -o \texttt{\$}HOME/work/bin/krishna krishna.go
-	\item[*] cd work/src/github.com/\'biogo/examples/igor
-	\item[*] go build -o \texttt{\$}HOME/work/bin/igor igor.go
-	\item[*] go build -o \texttt{\$}HOME/work/bin/seqer seqer.go
+	\item[*] go build -o \texttt{\$}HOME/bin/seqer seqer.go
 \end{enumerate}
 
 \subsubsection{5. Install CENSOR}

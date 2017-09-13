@@ -130,12 +130,12 @@ Then run krishna job.\\
 \end{enumerate}
 
 \subsubsection{3. seqer returns multiple fasta sequences corresponding to feature intervals described in the JSON output from igor.}
-seqer will also produce fastq consensus sequence output from one of MUSCLE or MAFFT. gffer converts the JSON output of igor to gff.
+gffer converts the JSON output of igor to gff. seqer will produce fastq consensus sequence output from one of MUSCLE or MAFFT. 
 
 \begin{enumerate}
-	\item[*] gffer \texttt{<} hg94\_krishna.json \texttt{>} hg94\_krishna.igor.json
+	\item[*] gffer \texttt{<} hg94\_krishna.json \texttt{>} hg94\_krishna.igor.gff
 	\item[*] cat chr-*.fa \texttt{>} hg19v37.mfa
-	\item[*] seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94\_krishna.igor.json
+	\item[*] seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94\_krishna.igor.gff
 \end{enumerate}
 
 -fasta: Output consensus as fasta with quality case filtering\\
@@ -151,7 +151,7 @@ seqer will also produce fastq consensus sequence output from one of MUSCLE or MA
 %\setlength\LTright{-50pt}           % default: \fill
 \setlength\tabcolsep{1.5pt}
 \begin{center}
-	\begin{tabular}{|c|c|c|c|c|c|c|}
+	\begin{tabular}{|l|c|c|c|c|c|c|}
 		\hline
 		\thead{Genome}	&	\thead{ Krishna Threads }	&	\thead{Genome DB \\ Size}	& \thead{Krishna run time \\ (hh:mm)}	&	\thead{Igor run time \\ (hh:mm)}	&	\thead{Seqer run time \\ (hh:mm)}  \\
 		\hline
@@ -183,7 +183,7 @@ seqer will also produce fastq consensus sequence output from one of MUSCLE or MA
 \subsection*{Repeat Library Annotation}
 The previous steps generate the repeat consensus sequences from the human genome, now we are going to annotated these consensus with repeat class.
 \subsection*{Annotate consensus sequences}
-\textbf{\textcolor{red}{Notes: All Jave scripts used here need to specify the directories where your data is and where you want your output in }}
+\textbf{\textcolor{red}{Notes: All Java scripts used here need to specify the directories where your data is and where you want your output in }}
 \subsubsection{1. Annotate consensus sequences with repeat families.}
 Use censor to annotated consensus sequences with Repbase library. 
 \begin{enumerate}
@@ -230,7 +230,7 @@ The phobos output will be used to identify SSRs: notKnownNotProtein.phobos.
 You will get a file called: SSR.txt
 
 \subsubsection{7. Generate annotated repeat library.}
-10 input files are require to generate a repeat library: \\
+Ten input files are require to generate a repeat library: \\
 1. ConsensusSequences.fa \\
 2. ConsensusSequences.fa.map \\
 3. notKnown.fa.tewb.gff \\
@@ -258,24 +258,27 @@ Then you will get a library called "*\_Library.fasta", you can also change this 
 		\hline
 		\thead{Genome}	& 	\thead{Consensus sequences size}	&	\thead{Censor first run \\ time (hh:mm)}	&	\thead{reportJ.pl \\ (hh:mm)}	&	\thead{phobos run time \\ (hh:mm)} \\
 		\hline
-		Human	&	38M	&	5:14	&	19:30	&	{<}00:05 \\
+		Human	&	38M	&	5:14	&	19:30	&	{<}00:10 \\
 		\hline 
-		Bearded Dragon	&	88M	&	2:41	&	{<}192	&	{<}00:05\\
+		Bearded Dragon	&	88M	&	22:21	&	{<}178	&	{<}00:10 \\
 		\hline
-		Anolis	&	63M	&	9:42	&	{<}56	&	{<}00:05 \\
+		New Bearded Dragon	&	88M	&	7:13	&	18:28	&	{<}00:10\\
 		\hline
-		Chicken	&	18M	&	3:01	&	{<}24	&	{<}00:05 \\
+		Anolis	&	63M	&	9:42	&	78	&	{<}00:10 \\
 		\hline
-		Opossum	&	60M	&	13:17	&	{<}48	&	{<}01:00 \\
+		Chicken	&	18M	&	3:01	&	{<}24	&	{<}00:10 \\
 		\hline
-		Platypus	&	162M	&	34:34	&	{<}192	&	{<}01:00 \\
+		Opossum	&	60M	&	13:17	&	80	&	{<}01:00 \\
 		\hline
-		Echidna	&	59M	&	36:40	&	105:12	&	01:54 \\
+		Platypus	&	162M	&	17:34	&	115	&	{<}01:00 \\
+		\hline
+		Echidna	&	59M	&	18:40	&	105	&	01:54 \\
 		\hline
 	\end{tabular}
 \end{center}
 
 * Analysis run on a slurm machine with 4$\sim$16 cpus, and 8GB RAM, machine running Red Hat Linux.\\
+** New Bearded dragon analysis used same bearded dragon genome, except it was run on a High Performance Computing machine with 32 cpus, machine running Red Hat Linux.
 
 \textbf{\textcolor{blue}{ \Large Finished! Good Luck!!!}}
 

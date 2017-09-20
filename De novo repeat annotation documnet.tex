@@ -42,12 +42,19 @@
 \author{Author Name}
 \date{Day Month Year}
 
+%------------------------------------------------------------------
+% Load prerequisite packages 
+%------------------------------------------------------------------
 
-\section*{\'biogo Command Line Applications User Manual}
-\textbf{\'biogo written by: Dan Kortschak} \\
-\textbf{Document organised by: Lu Zeng} \\
+% CARP documentation
+\begin{center}
+	\section*{CARP manual 1.1}
+	\noindent\textbf{\'biogo written by: Dan Kortschak} \\
+	\textbf{Document organised by: Lu Zeng} \\
+	\today
+\end{center}
 
-\'biogo \href{<url>}(\url{https://github.com/\'biogo/examples/}) is a bioinformatics library for the Go language. \'biogo/krishna and \'biogo/igor are de-novo repeat family identifying and annotation packages, which employ computational methods for identifying repeat element boundaries and family relationships from sequence data. \'biogo assists the runs of krishna and igor given a genomic database and uses the output to build, refine and classify consensus models of putative interspersed repeats. 
+\noindent\'biogo \href{<url>}(\url{https://github.com/biogo/examples/}) is a bioinformatics library for the Go language. \'biogo/krishna and \'biogo/igor are \textit{ab initio} repeat family identifiction and annotation packages, that employ computational methods for identifying repeat element boundaries and family relationships from sequence data. \'biogo assists the runs of krishna and igor given a genome sequence and uses the output to build, refine and classify consensus models of putative interspersed repeats. 
 
 %------------------------------------------------------------------
 % Load prerequisite packages 
@@ -55,36 +62,37 @@
 
 \subsection*{{Prerequisites}}
 
-\subsubsection{1. Download Go }
+\subsubsection*{ Download Go }
 Available at \href{<url>} (\url{https://golang.org/dl}). Developed and tested with version 1.5.2. \\
 For installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page.
 
 
-\subsubsection{2. Git}
+\subsubsection*{ Git}
 To perform the next step you may want Git to be installed. (Check that you have a git command before proceeding.) \\
 
-If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
+\noindent If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
 
-\subsubsection{3. Download \'biogo Packages}
+\subsubsection*{ Download \'biogo Packages}
 Download krishna and igor packages from github.
 
 \begin{enumerate}
-\item[*] go get github.com/biogo/examples/krishna
-\item[*] go get github.com/biogo/examples/igor
-\item[*] go get github.com/biogo/external
+	\item[*] go get github.com/biogo/examples/krishna
+	\item[*] go get github.com/biogo/examples/igor
+	\item[*] go get github.com/biogo/external
 \end{enumerate}
 
-\subsubsection{4. Build \'biogo Packages}
-Usually, when you download package, it will automatically built. However, some may not, so uild packages from \'biogo to you home directory using following command.
+\subsubsection*{ Build \'biogo Packages}
+Usually, when you download a package, it will automatically build. However, some may not, so build packages from \'biogo to your home bin directory using the following command.
 
 \begin{enumerate}
 	\item[*] go build -o \texttt{\$}HOME/bin/seqer seqer.go
 \end{enumerate}
 
-\subsubsection{5. Install CENSOR}
-Install censor to screens target genomes against a reference collection of repeats libraries with masking symbols, as well as generating a report classifying all found repeats. CENSOR needs wu-blast and Bioperl.\\
+\subsubsection*{ Install CENSOR}
+Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a 
+classifying all repeats found. CENSOR needs wu-blast and Bioperl installed.\\
 
-The version is now available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
+\noindent CENSOR is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 
 
 %------------------------------------------------------------------
@@ -92,45 +100,50 @@ The version is now available at \href{http://www.girinst.org/downloads/software/
 %------------------------------------------------------------------
 
 \subsection*{Example run}
-In this example, human genome were downloaded by chromosomes (24 chromosomes) from UCSC into files called chr-*.fa.\\
+In this example, the human genome was downloaded as chromosomes (24 chromosomes) from UCSC into files called chr-*.fa.\\
 
-\subsubsection{1. Use krishna-matrix to run alignment between human sequences as a matrix, it will run self alignment first, and then run pairwise alignment.}
+\subsubsection*{Use krishna to do pairwise alignment between human genome sequences}
 
-The default minimum hit length for krishna (-dpid) is 400bp, and minimum hit identity (-dplen) is 94\%. The smaller number of parameters you use, the longer time and bigger memory will be needed. \\
+krishna-matrix helps you to align sequences by using a matrix table. \\
 
-If you want change these parameters, just add "-dplen=*bp" and "-dpid=0.*" in 'matrix.go' under krishna source code: lines 102 and 132 (codes begin with "cmd := exec.Command").\\
+\noindent The default minimum hit length for krishna (-dplen) is 400bp, and minimum hit identity (-dpid) is 94\%. The smaller the length and the lower the hit identity parameters you use, the more time and memory you will need. \\
 
-Change the work directory that stores temporary files generated from krishna to you own directory (line 64 in matrix.go), Then rebuild 'matrix.go'. \\
+\noindent If you want to change these parameters, just add "-dplen=*bp" and "-dpid=0.*" in 'matrix.go' in the krishna source code: lines 102 and 132 (codes begin with "cmd := exec.Command").\\
 
-\textbf{\textcolor{red}{Notes: You need to rebuild the code every time when you did any changes. }} \\
+\noindent Change the work directory that stores temporary files generated from krishna to your own directory (line 64 in matrix.go), then rebuild 'matrix.go'. \\
 
-Now runs the job:
+\noindent\textbf{\textcolor{red}{Notes: You need to rebuild the code every time after you change it. }} \\
+
+\noindent Now run the job:
 
 \begin{enumerate}
 	\item[*] cd /data/rc003/lu/human (directory contains the sequences)
 	\item[*] krishna-matrix chr-*.fa
 \end{enumerate}
 
-\noindent If the genome sequence were very big and consisted by multiple contigs or scaffolds (>200MB), split it into smaller files (using bundle.go).\\
+\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go).\\
 
 \begin{enumerate}
 	\item[*] go build -o \texttt{\$}HOME/work/bin/bundle bundle.go
 	\item[*] bundle -bundle 50000000 -in seq.fa
 \end{enumerate}
 
--bundle: Specifies the sum of sequence length in a bundle. (default 20000000, 20MB).\\
--in: the genomes sequences need to split.\\
+\noindent -bundle: Specifies the total sequence length in a bundle. (default 20000000, 20MB).\\
+-in: the genomes sequences you need to split.\\
 Then run krishna job.\\
 
-\subsubsection{2. Use igor to take pairwise alignment data produced by krishna, and reports repeat feature family groupings in JSON format.}
+\subsubsection*{Use igor to report repeat feature family groupings in JSON format.}
 
+After running krishna, igor will take the pairwise alignment data to cluster repeat families.
 \begin{enumerate}
 	\item[*] cat *.gff \texttt{>} hg\_krishna.gff
 	\item[*] igor -in hg\_krishna.gff -out hg94\_krishna.json
 \end{enumerate}
 
-\subsubsection{3. seqer returns multiple fasta sequences corresponding to feature intervals described in the JSON output from igor.}
-gffer converts the JSON output of igor to gff. seqer will produce fastq consensus sequence output from one of MUSCLE or MAFFT. 
+\subsubsection*{Use seqer to generate consensus sequences from genome intervals.}
+By default seqer returns multiple fasta sequences corresponding to feature intervals described in the JSON output from igor. \\
+
+gffer converts the JSON output of igor to gff. seqer will produce fastq consensus sequence output from either MUSCLE or MAFFT. 
 
 \begin{enumerate}
 	\item[*] gffer \texttt{<} hg94\_krishna.json \texttt{>} hg94\_krishna.igor.gff
@@ -138,8 +151,8 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 	\item[*] seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94\_krishna.igor.gff
 \end{enumerate}
 
--fasta: Output consensus as fasta with quality case filtering\\
--maxFam: maxFam indicates maximum family size considered (0 == no limit).\\
+\noindent -fasta: Output consensus as fasta with quality case filtering\\
+-maxFam: maxFam indicates maximum family size permitted (0 == no limit).\\
 -minLen: Minimum proportion of longest family member.\\
 -threads: Number of concurrent aligner instances to run.
 
@@ -153,84 +166,87 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 \begin{center}
 	\begin{tabular}{|l|c|c|c|c|c|c|}
 		\hline
-		\thead{Genome}	&	\thead{ Krishna Threads }	&	\thead{Genome DB \\ Size}	& \thead{Krishna run time \\ (hh:mm)}	&	\thead{Igor run time \\ (hh:mm)}	&	\thead{Seqer run time \\ (hh:mm)}  \\
+		\thead{Genome}	&	\thead{ Krishna Threads }	&	\thead{Genome DB \\ Size (G)}	& \thead{Krishna run time \\ (hh:mm)}	&	\thead{Igor run time \\ (hh:mm)}	&	\thead{Seqer run time \\ (hh:mm)}  \\
 		\hline
-		Human	&	8	&	3.0G	&	~$\sim$200	&	128:30	&	2:23 \\
+		Human	&	8	&	3.0	&	~$\sim$200	&	128:30	&	2:23 \\
 		\hline 
-		Bearded Dragon	&	8	&	1.8G	&	~$\sim$23	&	73:11	&	{<}4 \\
+		Bearded Dragon	&	8	&	1.8	&	~$\sim$23	&	73:11	&	$<$4 \\
 		\hline
-		Anolis	& 6	& 1.8G	& 76:52	&	97:32	& 2:40	\\
+		Anolis	& 6	& 1.8	& 76:52	&	97:32	& 2:40	\\
 		\hline
-		Chicken	&	4	&	1017M	&	5	&	{<}4 & {<}1 \\
+		Chicken	&	4	&	1.0	&	5	&	$<$4 & $<$1 \\
 		\hline
-		Opossum	&	8	&	3.5G	&	~$\sim$83	&	61:48	&	4:52 \\
+		Opossum	&	8	&	3.5	&	~$\sim$83	&	61:48	&	4:52 \\
 		\hline
-		Platypus	&	8	&	2.0G	&	~$\sim$99	&	191:34	&	10:16 \\
+		Platypus	&	8	&	2.0	&	~$\sim$99	&	191:34	&	10:16 \\
 		\hline
-		Echidna	&	8	&	1.9G	&	{<} 360	&	12:43	&	9:02 \\
+		Echidna	&	8	&	1.9	&	$<$ 360	&	12:43	&	9:02 \\
 		\hline
 	\end{tabular}
 \end{center}
 
-* Analysis run on a 512GB RAM, machine running Red Hat Linux
-
-
+* Analysis runs on a machine with 512GB RAM, running Red Hat Linux \\
 
 %------------------------------------------------------------------
 % Second step, repeat family annotation
 %------------------------------------------------------------------
 
 \subsection*{Repeat Library Annotation}
-The previous steps generate the repeat consensus sequences from the human genome, now we are going to annotated these consensus with repeat class.
+Previous steps have generated repeat consensus sequences from the human genome, now we are going to annotate these repeat consensus sequences.
+
 \subsection*{Annotate consensus sequences}
-\textbf{\textcolor{red}{Notes: All Java scripts used here need to specify the directories where your data is and where you want your output in. Find the java scripts on github \href{<url>}(\url{https://github.com/luzengAdelaide/TE-Denovo-Annotation/JavaScripts}). }}
-\subsubsection{1. Annotate consensus sequences with repeat families.}
-Use censor to annotated consensus sequences with Repbase library. 
+\textbf{\textcolor{red}{Notes: All Java scripts used here need you to specify the directories where your input data is and where you want your output written. The java scripts are available on github \href{<url>}(\url{https://github.com/luzengAdelaide/TE-Denovo-Annotation/JavaScripts}). }}
+
+\subsubsection*{Annotate consensus sequences with repeat families.}
+Use censor to annotate consensus sequences with the Repbase library. 
 \begin{enumerate}
 	\item[*] cd consensus
 	\item[*] cat *.fq \texttt{>} ConsensusSequences.fa 
 	\item[*] censor -bprm cpus=8 -lib $\sim$/Verterbrates.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
 \end{enumerate}
-The censor outputs usually have 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked.  \\
+The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx and ConsensusSequences.fa.masked.  \\
 
-\subsubsection{2. Classify consensus sequences.}
-ConsensusSequences.fa and ConsensusSequences.fa.map were required in this step. You will also need to specify the directories where your data is and where we want your output in the java code, then compile and run it.\\
+\subsubsection*{Classify consensus sequences.}
+ConsensusSequences.fa and ConsensusSequences.fa.map are required in this step. You will also need to specify the directories for your input data and where you want your output written in the java code. Edit the source, compile and run.\\
 \begin{enumerate}
 	\item[*] javac ClassifyConsensusSequences.java
 	\item[*] java ClassifyConsensusSequences
 \end{enumerate}
-You should get 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff.
+This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff. \\
+Then we need to further annotate these notKnown.fa consensus sequences. 
 
-\subsubsection{3. Filter potential protein sequences.}
-In this step, you will need to run the perl script reportsJ.pl (perl reportsJ.pl). This uses wu-blast blastx, you will also need uniprot database. reportsJ.pl will ask for a list of databases to process, "libs.txt". We need file notknown.fa and notknown.fa.gff, put libs.txt into current directory.
+\subsubsection*{Filter potential protein sequences.}
+reportsJ.pl (perl reportsJ.pl) identifies consensus sequences that correspond to 1) proteins from uniprot, 2) reverse transcriptase and TE sequences from NCBI (GB\_TE), and 3) retrovirus. This uses wu-blast blastx, you will also need the uniprot, GB\_TE and retrovirus database. reportsJ.pl will ask for a list of databases to process, "libs.txt". This process will include notknown.fa and notknown.fa.gff, put libs.txt into the current directory. \\
 
-\textbf{\textcolor{red}{Notes: reportsJ.pl contains three parts: used to identify uniprot, GB\_TE, or retroviruses. You can comment other two parts, and run one of each parts separately in the same time, to save the running time.}}
+\noindent\textbf{\textcolor{red}{Notes: GB\_TE database can be downloaded using our perl code (GB\_TE\_efecth.pl), \href{<url>}(\url{https://github.com/luzengAdelaide/TE-Denovo-Annotation/PerlScripts)}. \\
+		\\
+At the end of this filtering step you will have three output files: 1) notKnown.fa.spwb.gff, 2) notKnown.fa.tewb.gff, 3) notKnown.fa.ervwb.gff}} 
 
-\subsubsection{4. Get proteins information from consensus sequences.}
-Another java program GetProteins.java will be used. It need two input files: notKnown.fa, notKnown.fa.spwb.gff (Generated from previous step).
+\subsubsection*{Get protein information from consensus sequences.}
+Another java program GetProteins.java will be used. It needs two input files: notKnown.fa, notKnown.fa.spwb.gff (Generated from previous step).
 \begin{enumerate}
 	\item[*] javac GetProteins.java
 	\item[*] java GetProteins
 \end{enumerate}
-You will get 2 output files: proteins.txt (a list of families that have been identified as proteins and the proteins they have matches);
-notKnownNotProtein.fa (a fasta file of the families that have not yet been classified).
+You will get 2 output files: proteins.txt (a list of families that have been identified as proteins and the proteins they match);
+notKnownNotProtein.fa (a fasta file of the families that were not classified).
 
-\subsubsection{5. Check simple sequential repeats (SSR).}
-Then check any existence of SSR in the unknown sequences, using phobos.
+\subsubsection*{Check for simple sequence repeats (SSR).}
+Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded from \href{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm} {\color{blue} Phobos download page}.
 \begin{enumerate}
-	\item[*] phobos -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos
+	\item[*] phobos -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa $>$ notKnownNotProtein.phobos
 \end{enumerate}
 
-\subsubsection{6. Identify the sequences that are SSRs from the phobos output.}
-The phobos output will be used to identify SSRs: notKnownNotProtein.phobos.
+\subsubsection*{Identify the sequences that are SSRs from the phobos output.}
+phobos output will be used to identify SSRs: notKnownNotProtein.phobos.
 \begin{enumerate}
 	\item[*] javac IdentifySSRs.java
 	\item[*] java IdentifySSRs
 \end{enumerate}
-You will get a file called: SSR.txt
+Your output will be a file called: SSR.txt
 
-\subsubsection{7. Generate annotated repeat library.}
-Ten input files are require to generate a repeat library: \\
+\subsubsection*{Generate annotated repeat library.}
+There are ten input files that are required to generate a repeat library: \\
 1. ConsensusSequences.fa \\
 2. ConsensusSequences.fa.map \\
 3. notKnown.fa.tewb.gff \\
@@ -239,13 +255,13 @@ Ten input files are require to generate a repeat library: \\
 6. known.txt \\
 7. GB\_TE.21032016.fa \\
 8. all\_retrovirus.fasta \\
-9. SSR.txt (if you do not have this, leave the definition in, it will cause error messages, but will not stop the program nor effect the results.) \\
-10. LA4v2-satellite.fa (you do not have this, or equivalent, as you didn't have nay satellites, but leave the definition in-it will cause error messages, but will not stop the program nor effect the results.)
+9. SSR.txt (if you do not have this, leave the definition in, it will generate error messages, but will not stop the program or affect the results.) \\
+10. LA4v2-satellite.fa (you do not have this, or equivalent, as you didn't have any satellites, but leave the definition in-it will cause error messages, but will not stop the program or affect the results.)
 \begin{enumerate}
 	\item[*] javac GenerateAnnotatedLibrary.java
 	\item[*] java GenerateAnnotatedLibrary
 \end{enumerate}
-Then you will get a library called "*\_Library.fasta", you can also change this to whatever you want to call your library
+This will generate a library called \textquotedblleft*Human\_Repeat\_Library.fasta\textquotedblright, you can change this to whatever you want to call your library.
 
 \subsection*{Benchmarks2}
 
@@ -256,29 +272,29 @@ Then you will get a library called "*\_Library.fasta", you can also change this 
 \begin{center}
 	\begin{tabular}{ | c | c | c | c| c |c|}
 		\hline
-		\thead{Genome}	& 	\thead{Consensus sequences size}	&	\thead{Censor first run \\ time (hh:mm)}	&	\thead{reportJ.pl \\ (hh:mm)}	&	\thead{phobos run time \\ (hh:mm)} \\
+		\thead{Genome}	& 	\thead{Consensus sequences size (M)}	&	\thead{Censor first run \\ time (hh:mm)}	&	\thead{reportJ.pl \\ (hh:mm)}	&	\thead{phobos run time \\ (hh:mm)} \\
 		\hline
-		Human	&	38M	&	5:14	&	19:30	&	{<}00:10 \\
+		Human	&	38	&	5:14	&	19:30	&	$<$00:10 \\
 		\hline 
-		Bearded Dragon	&	88M	&	22:21	&	{<}178	&	{<}00:10 \\
+		Bearded Dragon	&	88	&	22:21	&	$<$178	&	$<$00:10 \\
 		\hline
-		New Bearded Dragon	&	88M	&	7:13	&	18:28	&	{<}00:10\\
+		\textcolor{red}{New Bearded Dragon}	&	\textcolor{red}{88}	&	\textcolor{red}{7:13}	&	\textcolor{red}{18:28}	&	\textcolor{red}{$<$00:10} \\
 		\hline
-		Anolis	&	63M	&	9:42	&	78	&	{<}00:10 \\
+		Anolis	&	63	&	9:42	&	78	&	$<$00:10 \\
 		\hline
-		Chicken	&	18M	&	3:01	&	{<}24	&	{<}00:10 \\
+		Chicken	&	18	&	3:01	&	$<$24	&	$<$00:10 \\
 		\hline
-		Opossum	&	60M	&	13:17	&	80	&	{<}01:00 \\
+		Opossum	&	60	&	13:17	&	80	&	$<$01:00 \\
 		\hline
-		Platypus	&	162M	&	17:34	&	115	&	{<}01:00 \\
+		Platypus	&	162	&	17:34	&	115	&	$<$01:00 \\
 		\hline
-		Echidna	&	59M	&	18:40	&	105	&	01:54 \\
+		Echidna	&	59	&	18:40	&	105	&	01:54 \\
 		\hline
 	\end{tabular}
 \end{center}
 
-* Analysis run on a slurm machine with 4$\sim$16 cpus, and 8GB RAM, machine running Red Hat Linux.\\
-** New Bearded dragon analysis used same bearded dragon genome, except it was run on a High Performance Computing machine with 32 cpus, machine running Red Hat Linux.
+\noindent * Analysis run on a slurm machine with 4$\sim$16 cpus, and 8GB RAM, running Red Hat Linux.\\
+\textcolor{red}{** New Bearded dragon analysis used same bearded dragon genome, except it was run on a High Performance Computing machine with 32 cpus, running Red Hat Linux.} \\
 
 \textbf{\textcolor{blue}{ \Large Finished! Good Luck!!!}}
 

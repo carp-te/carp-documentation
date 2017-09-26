@@ -234,7 +234,7 @@ notKnownNotProtein.fa (a fasta file of the families that were not classified).
 \subsubsection*{Check for simple sequence repeats (SSR).}
 Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded from \href{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm} {\color{blue} Phobos download page}.
 \begin{enumerate}
-	\item[*] phobos -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa $>$ notKnownNotProtein.phobos
+	\item[*] phobos -r 7 \texttt{-{}-}outputFormat 0 \texttt{-{}-}printRepeatSeqMode 0 notKnownNotProtein.fa $>$ notKnownNotProtein.phobos
 \end{enumerate}
 
 \subsubsection*{Identify the sequences that are SSRs from the phobos output.}

@@ -82,9 +82,20 @@ Download krishna and igor packages from github.
 \end{enumerate}
 
 \subsubsection*{ Build \'biogo Packages}
-Usually, when you download a package, it will automatically build. However, some may not, so build packages from \'biogo to your home bin directory using the following command.
+Usually, when you download a package, it will automatically build. However, some may not, in that case, build packages from \'biogo to your home bin directory using the following command. \\
 
+To build krishna and krishna-matrix, go to the directory that contains krishna related codes (I saved all the go codes to a directory called "Workspace", if you saved in your \texttt{\$}HOME directory, just go to the src where you saved all Biogo package).
 \begin{enumerate}
+	\item[*] cd Workspace/src/github.com/biogo/examples/krishna/
+	\item[*] go build -o \texttt{\$}HOME/bin/krishna krishna.go
+	\item[*] go build -o \texttt{\$}HOME/bin/krishna-matrix matrix.go
+\end{enumerate}
+
+To build igor, gffer and seqer, go to the directory that contains related codes.
+\begin{enumerate}
+	\item[*] cd Workspace/src/github.com/biogo/examples/igor/
+	\item[*] go build -o \texttt{\$}HOME/bin/igor igor.go
+	\item[*] go build -o \texttt{\$}HOME/bin/gffer gffer.go
 	\item[*] go build -o \texttt{\$}HOME/bin/seqer seqer.go
 \end{enumerate}
 

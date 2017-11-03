@@ -84,8 +84,9 @@ Download krishna and igor packages from github.
 \subsubsection*{ Build \'biogo Packages}
 Usually, when you download a package, it will automatically build. However, some may not, in that case, build packages from \'biogo to your home bin directory using the following command. \\
 
-To build krishna and krishna-matrix, go to the directory that contains krishna related codes (I saved all the go codes to a directory called "Workspace", if you saved in your \texttt{\$}HOME directory, just go to the src where you saved all Biogo package).
-\begin{enumerate}
+To build krishna and krishna-matrix, go to the directory that contains krishna related codes {\color{red}{(As I made a directory "Workspace" when installing go, so codes download from github will automatically saved under /Workspace/src. If you saved in your \texttt{\$}HOME directory, just go to the \texttt{\$}HOME/src where you saved all Biogo package)}}.
+
+\begin{enumerate} 
 	\item[*] cd Workspace/src/github.com/biogo/examples/krishna/
 	\item[*] go build -o \texttt{\$}HOME/bin/krishna krishna.go
 	\item[*] go build -o \texttt{\$}HOME/bin/krishna-matrix matrix.go
@@ -132,7 +133,7 @@ krishna-matrix helps you to align sequences by using a matrix table. \\
 	\item[*] krishna-matrix chr-*.fa
 \end{enumerate}
 
-\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go).\\
+\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go, this code can be found at github \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/Codes})).\\
 
 \begin{enumerate}
 	\item[*] go build -o \texttt{\$}HOME/work/bin/bundle bundle.go
@@ -206,7 +207,7 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 Previous steps have generated repeat consensus sequences from the human genome, now we are going to annotate these repeat consensus sequences.
 
 \subsection*{Annotate consensus sequences}
-\textbf{\textcolor{red}{Notes: All Java scripts used here need you to specify the directories where your input data is and where you want your output written. The java scripts are available on github \href{<url>}(\url{https://github.com/luzengAdelaide/TE-Denovo-Annotation/JavaScripts}). }}
+\textbf{\textcolor{red}{Notes: All Java scripts used here need you to specify the directories where your input data is and where you want your output written. The java scripts are available on github \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/Codes}). }}
 
 \subsubsection*{Annotate consensus sequences with repeat families.}
 Use censor to annotate consensus sequences with the Repbase library. 
@@ -229,7 +230,7 @@ Then we need to further annotate these notKnown.fa consensus sequences.
 \subsubsection*{Filter potential protein sequences.}
 reportsJ.pl (perl reportsJ.pl) identifies consensus sequences that correspond to 1) proteins from uniprot, 2) reverse transcriptase and TE sequences from NCBI (GB\_TE), and 3) retrovirus. This uses wu-blast blastx, you will also need the uniprot, GB\_TE and retrovirus database. reportsJ.pl will ask for a list of databases to process, "libs.txt". This process will include notknown.fa and notknown.fa.gff, put libs.txt into the current directory. \\
 
-\noindent\textbf{\textcolor{red}{Notes: GB\_TE database can be downloaded using our perl code (GB\_TE\_efecth.pl), \href{<url>}(\url{https://github.com/luzengAdelaide/TE-Denovo-Annotation/PerlScripts)}. \\
+\noindent\textbf{\textcolor{red}{Notes: GB\_TE database can be downloaded using our perl code (GB\_TE\_efecth.pl), \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/Codes)}. \\
 		\\
 At the end of this filtering step you will have three output files: 1) notKnown.fa.spwb.gff, 2) notKnown.fa.tewb.gff, 3) notKnown.fa.ervwb.gff}} 
 

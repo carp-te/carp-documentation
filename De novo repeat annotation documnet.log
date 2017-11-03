@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  3 NOV 2017 10:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  3 NOV 2017 14:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,122 +874,134 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 103--105
+Underfull \hbox (badness 10000) in paragraph at lines 104--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--121
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--125
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 126--127
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 2617) in paragraph at lines 136--137
+\T1/futs/m/n/12 If genome se-quence files are very big and con-sist of mul-ti-p
+le con-tigs or scaf-folds
+ []
+
+
+Underfull \hbox (badness 1383) in paragraph at lines 136--137
+\T1/futs/m/n/12 ($\FMS/futm/m/n/12 ƒ$\T1/futs/m/n/12 200MB), split them into sm
+aller files (us-ing bun-dle.go, this code can be found at
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--145
+Underfull \hbox (badness 10000) in paragraph at lines 143--146
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
 [3]
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 178.
+(Font)              scaled to size 9.19998pt on input line 179.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 178.
+(Font)              scaled to size 6.99199pt on input line 179.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 178.
+(Font)              scaled to size 5.51999pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 178.
+(Font)              scaled to size 9.19998pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 178.
+(Font)              scaled to size 6.99199pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 178.
+(Font)              scaled to size 5.51999pt on input line 179.
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 209.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 210.
 
-Underfull \hbox (badness 10000) in paragraph at lines 218--219
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 221--222
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 230--231
+Underfull \hbox (badness 10000) in paragraph at lines 222--223
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--235
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
 
  []
 
 
-Underfull \hbox (badness 1622) in paragraph at lines 232--235
+Underfull \hbox (badness 10000) in paragraph at lines 233--236
+
+ []
+
+
+Underfull \hbox (badness 1622) in paragraph at lines 233--236
 \T1/futs/b/n/10 At the end of this fil-ter-ing step you will have three out-put
  files: 1) not-Known.fa.spwb.gff, 2) not-
  []
 
 
-Underfull \hbox (badness 2990) in paragraph at lines 237--238
+Underfull \hbox (badness 2990) in paragraph at lines 238--239
 \T1/futs/m/n/10 Another java pro-gram Get-Pro-teins.java will be used. It needs
  two in-put files: not-Known.fa, not-
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 307--309
+Underfull \hbox (badness 10000) in paragraph at lines 308--310
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 312.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 313.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 312.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 313.
  (./De novo repeat annotation documnet.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 312.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 312.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 313.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 313.
 Package rerunfilecheck Info: File `"De novo repeat annotation documnet".out' ha
 s not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 312.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 313.
  ) 
 Here is how much of TeX's memory you used:
  6715 strings out of 493089
@@ -998,7 +1010,7 @@ Here is how much of TeX's memory you used:
  10052 multiletter control sequences out of 15000+600000
  81323 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,14n,23p,644b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,14n,23p,644b,377s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/local/texl
@@ -1007,11 +1019,11 @@ ive/2015/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/local/texlive/201
 -dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/texlive/2015/texmf-dist/
 fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2015/texmf-dist/fo
 nts/type1/public/cm-super/sftt1200.pfb>
-Output written on "De novo repeat annotation documnet.pdf" (6 pages, 83919 byte
+Output written on "De novo repeat annotation documnet.pdf" (6 pages, 84257 byte
 s).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 96 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  29 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

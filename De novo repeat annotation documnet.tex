@@ -1,7 +1,7 @@
 % Use only LaTeX2e, calling the article.cls class and 12-point type.
 % !TeX spellcheck = en_AU
 % Ser the document type and font
-\documentclass[12pt]{report}
+\documentclass[12pt]{article}
 
 % graphics packages
 \usepackage{graphicx}
@@ -61,16 +61,11 @@
 % Load prerequisite packages 
 %------------------------------------------------------------------
 
-\subsection*{{Prerequisites}}
+\subsection{{Prerequisites}}
 
 \subsubsection{ Download Go }
 Available at \href{<url>} (\url{https://golang.org/dl}).\\
-For installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page. \\
-{\color{red} Note:}  For convenience, add the workspace's bin subdirectory to your PATH, or add in .profile. 
-
-\begin{enumerate}
-	\item[*] export PATH=\$PATH:\$(go env GOPATH)/bin
-\end{enumerate}
+For installation details, follow the instructions on the \href{https://golang.org/doc/install#install} {\color{blue}Go installation} page. 
 
 \subsubsection{Git}
 To perform the next step you will need Git to be installed. (Check that you have a git command before proceeding.) \\
@@ -78,7 +73,12 @@ To perform the next step you will need Git to be installed. (Check that you have
 \noindent If you do not have a working Git installation, follow the instructions on the \href{https://git-scm.com/downloads}{\color{blue}Git download} page.
 
 \subsubsection{Download b\'iogo Packages}
-Download and install krishna and igor packages from github. \\
+{\color{red} Note:}  For convenience, add the workspace's bin subdirectory to your PATH, or add in \$HOME/.profile. 
+\begin{enumerate}
+	\item[*] export PATH=\$PATH:\$(go env GOPATH)/bin
+\end{enumerate}
+
+\noindent Download and install krishna and igor packages from github. 
 
 \begin{enumerate}
 	\item[*] go get -u github.com/biogo/examples/krishna
@@ -103,8 +103,8 @@ Install MUSCLE to generate consensus sequences.
 % Run first step, krishna alignment and family classification
 %------------------------------------------------------------------
 
-\subsection*{Example run}
-In this example, the human genome was downloaded as chromosomes (24 chromosomes) from UCSC into files called chr*.fa.\\
+\subsection{Example run}
+In this example, the human genome was downloaded as chromosomes (24 chromosomes) from UCSC into files called chr*.fa.
 
 \subsubsection{Use krishna to do pairwise alignment between human genome sequences}
 
@@ -118,17 +118,21 @@ krishna-matrix helps you to align sequences by using a matrix table. \\
 
 \begin{enumerate}
 	\item[*] cd /data/rc003/lu/human (directory contains the sequences)
-	\item[*] matrix -krishnaflags=\textquotedbl-tmp=/scratch -threads=8 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
+	\item[*] matrix -krishnaflags=\textquotedbl-tmp=./ -threads=8 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
 \end{enumerate}
+-tmp: store the temporary files generated from krishna running, you can spcify you own directory. \\
+-threads:  number of concurrent aligner instances to run. \\
+-filtid: minimum hit identity. \\
+-filtlen: minimum hit length. \\
 
-\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go), please find all the relavant codes under \href{<url>}(\\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes}).\\
+\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go), please find all the relavant codes under \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes}).\\
 
 \begin{enumerate}
 	\item[*] go build -o \$(go env GOPATH)/bin/bundle bundle.go
 	\item[*] bundle -bundle 80000000 -in seq.fa
 \end{enumerate}
 
-\noindent -bundle: Specifies the total sequence length in a bundle. (default 20000000, 20MB).\\
+\noindent -bundle: specifies the total sequence length in a bundle. (default 20000000, 20MB).\\
 -in: the genomes sequences you need to split.\\
 Then run krishna job.\\
 
@@ -185,7 +189,7 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 	\end{tabular}
 \end{center}
 
-* Analysis runs on a machine with 512GB RAM, running Red Hat Linux \\
+* Analysis runs on a machine with 512GB RAM, running Red Hat Linux.
 
 %------------------------------------------------------------------
 % Second step, repeat family annotation
@@ -193,10 +197,7 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 
 \subsection{Repeat Library Annotation}
 Previous steps have generated repeat consensus sequences from the human genome, now we are going to annotate these repeat consensus sequences. \\
-\textbf{\textcolor{red}{All the files used below can be found at \href{<url>}(\url{https://data.mendeley.com/datasets/k88h5xnhcb/edit})}}. \\
-\textbf{\textcolor{red}{All the codes used below can be found at \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes})}.} \\
-
-
+\textbf{\textcolor{red}{All the codes used below can be found at \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes})}.} 
 
 \subsection{Annotate consensus sequences}
 \textbf{\textcolor{red}{Notes: All Java scripts used here need you to specify the directories where your input data is and where you want your output written. }}
@@ -208,7 +209,7 @@ Use censor to annotate consensus sequences with the Repbase library. The Vertebr
 	\item[*] cat *.fq \texttt{>} ConsensusSequences.fa 
 	\item[*] censor -bprm cpus=8 -lib $\sim$/Vertebrates.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
 \end{enumerate}
-The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked.  \\
+The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked. 
 
 \subsubsection{Classify consensus sequences.}
 ConsensusSequences.fa and ConsensusSequences.fa.map are required in this step. You will also need to specify the directories for your input data and where you want your output written in the java code. Edit the source, compile and run.\\
@@ -216,7 +217,7 @@ ConsensusSequences.fa and ConsensusSequences.fa.map are required in this step. Y
 	\item[*] javac ClassifyConsensusSequences.java
 	\item[*] java ClassifyConsensusSequences
 \end{enumerate}
-This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff. \\
+This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff. 
 Then we need to further annotate these notKnown.fa consensus sequences. 
 
 \subsubsection{Filter potential protein sequences.}
@@ -299,7 +300,6 @@ This will generate a library called \textquotedblleft Human\_Repeat\_Library.fas
 
 \noindent * Analysis run on a slurm machine with 4$\sim$16 cpus, and 8GB RAM, running Red Hat Linux.\\
 \textcolor{red}{** New Bearded dragon analysis used same bearded dragon genome, except it was run on a High Performance Computing machine with 32 cpus, running Red Hat Linux.} \\
-
 
 \textbf{\textcolor{blue}{ \Large Finished! Good Luck!!!}}
 

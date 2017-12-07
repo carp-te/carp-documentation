@@ -55,7 +55,9 @@
 	\today
 \end{center}
 
-\noindent krishna and igor are \textit{ab initio} repeat family identifiction and annotation programs, that  identify repeat element boundaries and family relationships from whole-genome sequence data. These programs build, refine and classify consensus models of putative interspersed repeats. krishna and igor are built using b\'iogo \href{<url>}(\url{https://github.com/biogo/biogo/}), a bioinformatics library for the Go language. 
+\noindent krishna and igor are \textit{ab initio} repeat family identification and annotation programs, that  identify repeat element boundaries and family relationships from whole-genome sequence data. These programs build, refine and classify consensus models of putative interspersed repeats. krishna and igor are built using b\'iogo \href{<url>}(\url{https://github.com/biogo/biogo/}), a bioinformatics library for the Go language.  
+
+\noindent \textbf{Disclaimer} This document is provided to assist researchers with linux command line experience.  We have done our best to provide usable instructions, examples and advice, but users assume full responsibility for the output they generate and the authors accept no responsibility for user generated output from any programs or methods listed herein.  
 
 %------------------------------------------------------------------
 % Load prerequisite packages 
@@ -91,7 +93,7 @@ To perform the next step you will need Git to be installed. (Check that you have
 \subsubsection{ Install CENSOR}
 Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs wu-blast/NCBI-blast and Bioperl installed.\\
 
-\noindent CENSOR is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
+\noindent CENSOR, along with instructions for installation, is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 
 \subsubsection{ Install MUSCLE}
 Install MUSCLE to generate consensus sequences.
@@ -112,23 +114,23 @@ krishna-matrix helps you to align sequences by using a matrix table. \\
 
 \noindent The default minimum hit length for krishna (-dplen) is 400bp, and minimum hit identity (-dpid) is 94\%. The smaller the length and the lower the hit identity parameters you use, the more time and memory you will need. \\
 
-\noindent If you want to change running parameters, for example, minimum hit length with 200bp, and minimum hit identity with 90\%, just specify the parameters when running matrix {\color{red}-krishnaflags=\textquotedbl-tmp=/scratch -threads=8 -log -filtid=0.9 -filtlen=200\textquotedbl}.\\
+\noindent If you want to change running parameters, for example, minimum hit length of 200bp, and minimum hit identity of 90\%, just specify the parameters when running matrix {\color{red}-krishnaflags=\textquotedbl-tmp=/scratch -threads=8 -log -filtid=0.9 -filtlen=200\textquotedbl}.\\
 
 \noindent Now run the job:
 
 \begin{enumerate}
-	\item[*] cd /data/rc003/lu/human (directory contains the sequences)
+	\item[*] cd /data/rc003/lu/human (directory contains the sequences. Example path shown)
 	\item[*] matrix -krishnaflags=\textquotedbl-tmp=./ -threads=8 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
 \end{enumerate}
--tmp: store the temporary files generated from krishna running, you can spcify you own directory. \\
+-tmp: store the temporary files generated from krishna running, you can specify your own directory. \\
 -threads:  number of concurrent aligner instances to run. \\
 -filtid: minimum hit identity. \\
 -filtlen: minimum hit length. \\
 
-\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), split them into smaller files (using bundle.go), please find all the relavant codes under \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes}).\\
+\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), you can use bundle to split them into smaller files. For example,
 
 \begin{enumerate}
-	\item[*] go build -o \$(go env GOPATH)/bin/bundle bundle.go
+	\item[*] go get github.com/biogo/examples/bundle
 	\item[*] bundle -bundle 80000000 -in seq.fa
 \end{enumerate}
 
@@ -197,7 +199,9 @@ gffer converts the JSON output of igor to gff. seqer will produce fastq consensu
 
 \subsection{Repeat Library Annotation}
 Previous steps have generated repeat consensus sequences from the human genome, now we are going to annotate these repeat consensus sequences. \\
-\textbf{\textcolor{red}{All the codes used below can be found at \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes})}.} 
+\textbf{\textcolor{red}{All the files used below can be found at \\
+		\href{<url>}(\url{https://data.mendeley.com/datasets/k88h5xnhcb/draft?a=d401233a-5af8-4879-81e8-c049b7133c8c})}}. \\
+\textbf{\textcolor{red}{All the codes used below can be found at \\ \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes})}.} 
 
 \subsection{Annotate consensus sequences}
 \textbf{\textcolor{red}{Notes: All Java scripts used here need you to specify the directories where your input data is and where you want your output written. }}
@@ -236,7 +240,7 @@ You will get 2 output files: proteins.txt (a list of families that have been ide
 notKnownNotProtein.fa (a fasta file of the families that were not classified).
 
 \subsubsection{Check for simple sequence repeats (SSR).}
-Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2\\
+Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2\\
 .
 \begin{enumerate}
 	\item[*] phobos-linux-gcc4.1.2 -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa $>$ notKnownNotProtein.phobos

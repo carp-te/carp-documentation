@@ -114,16 +114,16 @@ krishna-matrix helps you to align sequences by using a matrix table. \\
 
 \noindent The default minimum hit length for krishna (-dplen) is 400bp, and minimum hit identity (-dpid) is 94\%. The smaller the length and the lower the hit identity parameters you use, the more time and memory you will need. \\
 
-\noindent If you want to change running parameters, for example, minimum hit length of 200bp, and minimum hit identity of 90\%, just specify the parameters when running matrix {\color{red}-krishnaflags=\textquotedbl-tmp=/scratch -threads=8 -log -filtid=0.9 -filtlen=200\textquotedbl}.\\
+\noindent If you want to change running parameters, for example, minimum hit length of 200bp, and minimum hit identity of 90\%, just specify the parameters when running matrix {\color{red}-krishnaflags=\textquotedbl-tmp=/scratch -threads=2 -log -filtid=0.9 -filtlen=200\textquotedbl}.\\
 
 \noindent Now run the job:
 
 \begin{enumerate}
 	\item[*] cd /data/rc003/lu/human (directory contains the sequences. Example path shown)
-	\item[*] matrix -krishnaflags=\textquotedbl-tmp=./ -threads=8 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
+	\item[*] matrix -krishnaflags=\textquotedbl-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
 \end{enumerate}
 -tmp: store the temporary files generated from krishna running, you can specify your own directory. \\
--threads:  number of concurrent aligner instances to run. \\
+-threads:  number of threads to use for alignment. \\
 -filtid: minimum hit identity. \\
 -filtlen: minimum hit length. \\
 

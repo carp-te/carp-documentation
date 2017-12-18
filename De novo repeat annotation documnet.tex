@@ -211,7 +211,7 @@ Use censor to annotate consensus sequences with the Repbase library. The Vertebr
 \begin{enumerate}
 	\item[*] cd consensus
 	\item[*] cat *.fq \texttt{>} ConsensusSequences.fa 
-	\item[*] censor -bprm cpus=8 -lib $\sim$/Vertebrates.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
+	\item[*] censor -bprm cpus=8 -lib $\sim$/Vertebrate\_use.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
 \end{enumerate}
 The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked. 
 

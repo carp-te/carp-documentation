@@ -120,10 +120,11 @@ krishna-matrix helps you to align sequences by using a matrix table. \\
 
 \begin{enumerate}
 	\item[*] cd /data/rc003/lu/human (directory contains the sequences. Example path shown)
-	\item[*] matrix -krishnaflags=\textquotedbl-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
+	\item[*] matrix -threads=8 -krishnaflags=\textquotedbl-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400\textquotedbl{} chr*.fa
 \end{enumerate}
 -tmp: store the temporary files generated from krishna running, you can specify your own directory. \\
--threads:  number of threads to use for alignment. \\
+-threads (matrix): number of concurrent krishna instances to run. (default 6) \\
+-threads (krishnaflags): number of threads to use for alignment. (default 1) \\
 -filtid: minimum hit identity. \\
 -filtlen: minimum hit length. \\
 

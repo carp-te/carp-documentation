@@ -439,7 +439,7 @@ public class GenerateAnnotatedLibrary {
 			}
 		}
 
-	private static String iDir = "/data/rc003/lu/echidna/results_classify/";
+	private static String iDir = "./";
 	private static String oDir = "library/";
 	private static String library = oDir + "Tachy94_250bp_Library.fasta";
 	private static String headers = oDir + "wantedCSHeaders.txt";

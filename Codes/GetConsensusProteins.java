@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class GetConsensusProteins {
-	private static String dir = "/data/rc003/lu/echidna/results_classify/";
+	private static String dir = "./";
 	private static String protein = "protein.txt";
 	private static String consensus = "tachy94_250bp_new.ConsensusSequences.fa";
 	private static String outFile = "tachy94.Proteins.fa";

@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class IdentifySSRs {
-	private static String dDir = "/data/rc003/lu/echidna/results_classify/";
+	private static String dDir = "./";
 	private static String inPrefix = dDir + "notKnownNotProtein";
 	private static String pFile = inPrefix + ".phobos";
 	

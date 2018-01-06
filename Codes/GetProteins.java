@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class GetProteins {
-	private static String dDir = "/data/rc003/lu/echidna/results_classify/";
+	private static String dDir = "./";
 	private static String pDir = dDir + "ProteinReport/";
 	private static String data = "notKnown.fa";
 	private static String ipFile = pDir + data + ".spwb.gff";

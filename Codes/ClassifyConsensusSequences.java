@@ -22,7 +22,7 @@ ClassifyConsensusSequences
 
 public class ClassifyConsensusSequences {
 	private static String lFile = "/home/a1635743/censor_lib/Vertebrate_use.fa";
-	private static String bDir = "/fast/users/a1635743/genomes/echidna/";
+	private static String bDir = "./";
 	private static String dDir = bDir + "results_classify/";
 	private static String cFile = bDir + "tachy94_250bp_new.ConsensusSequences.fa";
 	private static String map = bDir + "tachy94_250bp_new.ConsensusSequences.fa.map";

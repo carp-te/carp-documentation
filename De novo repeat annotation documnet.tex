@@ -214,6 +214,17 @@ Use censor to annotate consensus sequences with the Repbase library. The Vertebr
 	\item[*] cat *.fq \texttt{>} ConsensusSequences.fa 
 	\item[*] censor -bprm cpus=8 -lib $\sim$/Vertebrate\_use.fa -lib ~$\sim$/our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
 \end{enumerate}
+For people that not able to access wu-blast, CENSOR can also use NCBI BLAST instead, please find detail in \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page..
+\begin{enumerate}
+	\item[*] censor.ncbi -lib Vertebrates.fa -lib our\_known\_reps\_20130520.fasta ConsensusSequences.fa 
+\end{enumerate}
+RepeatMasker can also be used to replace CENSOR in this step (RM-Blast was used as search engine).	
+\begin{enumerate}
+	\item[*] cat Vertebrates.fa our\_known\_reps\_20130520 > combined\_library.fa
+	\item[*] RepeatMasker -pa 16 -a -nolow -norna -dir ./ -lib combine\_library.fa ConsensusSequences.fa
+	\item[*] perl format\_RMSK.pl ConsensusSequences.fa > tmp 
+	\item[*] mv tmp ConsensusSequences.fa
+\end{enumerate}
 The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked. 
 
 \subsubsection{Classify consensus sequences.}

@@ -4,8 +4,8 @@ import java.util.*;
 public class GetConsensusProteins {
 	private static String dir = "./";
 	private static String protein = "protein.txt";
-	private static String consensus = "ConsensusSequences.fa";
-	private static String outFile = "Proteins.fa";
+	private static String consensus = "tachy94_250bp_new.ConsensusSequences.fa";
+	private static String outFile = "tachy94.Proteins.fa";
 	
 	public static void main (String[] args) {writeConsensus(getProteins());}
 		

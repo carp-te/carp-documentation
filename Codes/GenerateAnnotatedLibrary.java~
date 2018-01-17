@@ -441,17 +441,17 @@ public class GenerateAnnotatedLibrary {
 
 	private static String iDir = "./";
 	private static String oDir = "library/";
-	private static String library = oDir + "Denovo_TE_Library.fasta";
+	private static String library = oDir + "Tachy94_250bp_Library.fasta";
 	private static String headers = oDir + "wantedCSHeaders.txt";
 	//private static String satFile = sDir + "LA4v2-satellite.fa";//File moved to all-repeats
-	private static String CSFile = iDir + "ConsensusSequences.fa";
+	private static String CSFile = iDir + "tachy94_250bp_new.ConsensusSequences.fa";
 	private static String TEgff = iDir + "notKnown.fa.tewb.gff";
 	private static String GBTE = iDir + "GB_TE.21032016.fa";
 	private static String ERVgff = iDir + "notKnown.fa.ervwb.gff";
 	private static String ALLR = iDir + "all_retrovirus.fasta";
 	private static String SSR = iDir + "SSR.txt";
 	private static String Proteins = iDir + "protein.txt";
-	private static String IRS = iDir + "ConsensusSequences.fa.map"; 
+	private static String IRS = iDir + "tachy94_250bp_new.ConsensusSequences.fa.map"; 
 	private static String IRM = iDir + "known.txt";
 	private static double restMinCoverage = .9;
 	private static double sineMinCoverage = .9;

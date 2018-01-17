@@ -21,12 +21,12 @@ ClassifyConsensusSequences
 
 
 public class ClassifyConsensusSequences {
-	private static String lFile = "./Vertebrate_use.fa";
+	private static String lFile = "/home/a1635743/censor_lib/Vertebrate_use.fa";
 	private static String bDir = "./";
 	private static String dDir = bDir + "results_classify/";
-	private static String cFile = bDir + "ConsensusSequences.fa";
-	private static String map = bDir + "ConsensusSequences.fa.map";
-	private static String olFile = "./our_known_reps_20130520.fasta";
+	private static String cFile = bDir + "tachy94_250bp_new.ConsensusSequences.fa";
+	private static String map = bDir + "tachy94_250bp_new.ConsensusSequences.fa.map";
+	private static String olFile = "/home/a1635743/our_known_reps_20130520.fasta";
 	private static String known = dDir + "known.txt";
 	private static String partial = dDir + "partial.txt";
 	private static String check = dDir + "check.txt";

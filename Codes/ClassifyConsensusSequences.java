@@ -15,8 +15,8 @@ ClassifyConsensusSequences
 	Outputs: check.txt (for checking individual sequence mappings)
 		known.txt (list of "identified" sequences with name of the library sequence they match)
 		partial.txt (list of partially matched sequences with a name list of the library sequences they match)
-		notKnown.fa (fasta file of the not known sequences) 
-		notKnown.fa.gff 		
+		notKnown.fa (fasta file of the not known sequences, including seqs with hits to CENSOR or not) 
+		notKnown.fa.gff (only include family names have hit(s) with CENSOR) 		
 ***************************/
 
 
@@ -126,7 +126,7 @@ public class ClassifyConsensusSequences {
 			boolean wanted = false;
 			String line = null;
 			while ((line = in.readLine()) != null) {
-				if (line.charAt(0) == '>') wanted = !notWanted.contains(line.substring(1));
+				if (line.charAt(0) == '>') wanted = !notWanted.contains(line.substring(1).split(" ")[0]);
 				if (wanted) out.write(line + "\n");
 				}
 			in.close();

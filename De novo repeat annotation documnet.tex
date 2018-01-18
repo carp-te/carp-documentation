@@ -233,13 +233,13 @@ ConsensusSequences.fa and ConsensusSequences.fa.map are required in this step. Y
 	\item[*] javac ClassifyConsensusSequences.java
 	\item[*] java ClassifyConsensusSequences
 \end{enumerate}
-This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notKnown.fa.gff. 
+This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, partial.fa.gff. 
 Then we need to further annotate these notKnown.fa consensus sequences. 
 
 \subsubsection{Filter potential protein sequences.}
-In this step, you will need to run the perl script reportsJ.pl (perl reportsJ.pl). This uses wu-blast/NCBI-blast blastx, you will also need the uniprot database. reportsJ.pl will ask for a list of databases to process, "libs.txt". This will include notknown.fa and notknown.fa.gff, put libs.txt into the current directory. \\
+In this step, you will need to run the perl script reportsJ.sh (perl reportsJ.sh). This uses wu-blast/NCBI-blast blastx, you will also need the uniprot database. reportsJ.sh will ask for a list of databases to process, "libs.txt". This will include notknown.fa and partial.fa.gff, put libs.txt into the current directory. \\
 
-\noindent\textbf{\textcolor{red}{Notes: reportsJ.pl contains three parts: 1) identify uniprot, 2) GB\_TE, 3) retroviruses. You can comment out two parts, and run each part separately in parallel to save time. \\
+\noindent\textbf{\textcolor{red}{Notes: reportsJ.sh contains three parts: 1) identify uniprot, 2) GB\_TE, 3) retroviruses. You can comment out two parts, and run each part separately in parallel to save time. \\
 		From these three steps, you will get three output files for following steps: 1) notKnown.fa.spwb.gff, 2) notKnown.fa.tewb.gff, 3) notKnown.fa.ervwb.gff}} 
 
 \subsubsection{Get protein information from consensus sequences.}

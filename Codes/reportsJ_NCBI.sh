@@ -15,7 +15,7 @@
 
 # Search protein data (Uniprot database)
 # If you decided to download your own datasets, you need to make database for the blastx
-makeblastdb -in uniprot_sprot.fasta -dbtype nucl
+makeblastdb -in uniprot_sprot.fasta -dbtype prot
 blastx -db uniprot_sprot.fasta -query notKnown.fa -max_hsps 1 -seg no -evalue 0.00001 -num_threads 32 -max_target_seqs 1 -word_size 2 -outfmt 6 -out notKnown.fa.spwb.ncbi
 awk '{print $1"\t""blast""\t""hit""\t"$7"\t"$8"\t"$11"\t"".""\t"".""\t""Target sp|"$2" "$9" "$10}' notKnown.fa.spwb.ncbi > tmp
 awk '{if($4>$5) print $1"\t"$2"\t"$3"\t"$5"\t"$4"\t"$6"\t"$7"\t"$8"\t"$9" "$10" "$11" "$12; else print $0}' tmp > notKnown.fa.spwb.gff

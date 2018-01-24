@@ -23,6 +23,6 @@ python ./report_run/wublastx2gff.py notKnown.fa.tewb > notKnown.fa.tewb.gff
 
 # Search Retrovirus data
 # If you decided to download your own datasets, you need to make database for the tblastx
-xdformat -p -k all_retrovirus.fasta
+xdformat -n -k all_retrovirus.fasta
 tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.ervwb
 python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff

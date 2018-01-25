@@ -162,8 +162,7 @@
 	\subsubsection{Download b\'iogo Packages}
 	{\color{red} Note:}  For convenience, add the workspace's bin subdirectory to your PATH, or add in \$HOME/.profile. 
 	\begin{lstlisting}[language=bash]
-	export PATH=$PATH:$(go env GOPATH)/bin
-	\end{lstlisting}
+	export PATH=$PATH:$(go env GOPATH)/bin \end{lstlisting}
 	\noindent Download and install krishna and igor packages from github. 
 	
 	\begin{lstlisting}[language=bash, columns=flexible]
@@ -171,8 +170,7 @@
 	go get github.com/biogo/examples/krishna/matrix
 	go get github.com/biogo/examples/igor
 	go get github.com/biogo/examples/igor/seqer
-	go get github.com/biogo/examples/igor/gffer
-	\end{lstlisting}
+	go get github.com/biogo/examples/igor/gffer \end{lstlisting}
 	
 	\subsubsection{ Install CENSOR}
 	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs wu-blast/NCBI-blast and Bioperl installed.\\
@@ -204,8 +202,7 @@
 	
 	\begin{lstlisting}[language=bash]
 	cd /your/path/here/human 
-	matrix -threads=8 -krishnaflags="-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400" chr*.fa
-	\end{lstlisting}
+	matrix -threads=8 -krishnaflags="-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400" chr*.fa \end{lstlisting}
 	
 	\noindent -tmp: store the temporary files generated from running krishna, you can specify your own directory. \\
 	-threads (matrix): number of concurrent krishna instances to run. (default 6) \\
@@ -217,8 +214,7 @@
 	
 	\begin{lstlisting}[language=bash]
 	go get github.com/biogo/examples/bundle
-	bundle -bundle 80000000 -in seq.fa
-	\end{lstlisting}
+	bundle -bundle 80000000 -in seq.fa \end{lstlisting}
 	
 	\noindent -bundle: specifies the total sequence length in a bundle. (default 20000000, 20MB).\\
 	-in: the genomes sequences you need to split.\\
@@ -229,8 +225,7 @@
 	After running krishna, igor will take the pairwise alignment data to cluster repeat families.
 	\begin{lstlisting}[language=scala]
 	find ./ -maxdepth 1 -name '[!.]*.gff' -print0 | xargs -r0 cat > hg_krishna.gff
-	igor -in hg_krishna.gff -out hg94_krishna.json
-	\end{lstlisting}
+	igor -in hg_krishna.gff -out hg94_krishna.json \end{lstlisting}
 	
 	\subsubsection{Use seqer to generate consensus sequences from genome intervals .}
 	seqer returns multiple fasta sequences corresponding to feature intervals described in the JSON output from igor. \\
@@ -240,8 +235,7 @@
 	\begin{lstlisting}[language=bash]
 	gffer < hg94_krishna.json > hg94_krishna.igor.gff
 	cat chr*.fa > hg19v37.mfa
-	seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94_krishna.igor.gff
-	\end{lstlisting}
+	seqer -aligner=muscle -dir=consensus -fasta=true -maxFam=100 -subsample=true -minLen=0.95 -threads=12 -ref=hg19v37.mfa hg94_krishna.igor.gff \end{lstlisting}
 	
 	\noindent -fasta: Output consensus as fasta with quality case filtering\\
 	-maxFam: maxFam indicates maximum family size permitted (0 == no limit).\\
@@ -298,8 +292,7 @@
 	\begin{lstlisting}[language=scala]
 	find ./consensus -maxdepth 1 -name '[!.]*.fq' -print0 | xargs -r0 cat > ConsensusSequences.fa
 	
-	censor -bprm cpus=8 -lib ~/Vertebrates.fa -lib ~/our_known_reps_20130520.fasta ConsensusSequences.fa 
-	\end{lstlisting}
+	censor -bprm cpus=8 -lib ~/Vertebrates.fa -lib ~/our_known_reps_20130520.fasta ConsensusSequences.fa  \end{lstlisting}
 	For people that are not able to access wu-blast or prefer to use another aligner, CENSOR can also use NCBI BLAST instead (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), please find details for CENSOR installation at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	\begin{lstlisting}[language=bash]
 	censor.ncbi -lib Vertebrates.fa -lib our_known_reps_20130520.fasta ConsensusSequences.fa 
@@ -312,16 +305,14 @@
 	
 	perl format_RMSK.pl ConsensusSequences.fa > tmp 
 	
-	mv tmp ConsensusSequences.fa
-	\end{lstlisting}
+	mv tmp ConsensusSequences.fa \end{lstlisting}
 	The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked. 
 	
 	\subsubsection{Classify consensus sequences.}
 	ConsensusSequences.fa and ConsensusSequences.fa.map are required in this step. You will also need to specify the directories for your input data and where you want your output written in the java code. Edit the source, compile and run.\\
 	\begin{lstlisting}[language=java]
 	javac ClassifyConsensusSequences.java
-	java ClassifyConsensusSequences
-	\end{lstlisting}
+	java ClassifyConsensusSequences \end{lstlisting}
 	This should generate 5 output files: known.txt, partial.txt, check.txt, notKnown.fa, notknown.fa.gff. 
 	Then we need to further annotate these notKnown.fa consensus sequences. 
 	
@@ -346,9 +337,7 @@
 	
 	blastx ./report_run/sprot notKnown.fa  -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.spwb
 	
-	python ./report_run/wublastx2gff.py notKnown.fa.spwb > notKnown.fa.spwb.gff
-	
-	\end{lstlisting}
+	python ./report_run/wublastx2gff.py notKnown.fa.spwb > notKnown.fa.spwb.gff \end{lstlisting}
 	
 	\noindent \textcolor{red}{2) Identify GB\_TE sequences}
 	\begin{lstlisting}[language=scala]
@@ -356,8 +345,7 @@
 	
 	blastx ./BlastDB/GB_TE.new notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.tewb
 	
-	python ./report_run/wublastx2gff.py notKnown.fa.tewb > notKnown.fa.tewb.gff
-	\end{lstlisting}
+	python ./report_run/wublastx2gff.py notKnown.fa.tewb > notKnown.fa.tewb.gff \end{lstlisting}
 	
 	\noindent \textcolor{red}{3) Identify potential retrovirus sequences}
 	\begin{lstlisting}[language=scala]
@@ -365,8 +353,7 @@
 	
 	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.ervwb
 	
-	python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff
-	\end{lstlisting}
+	python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff \end{lstlisting}
 	
 	\noindent \textbf{-gspmax:} max. number of gapped HSPs (GSPs) saved per subject sequence (default 0; 0 => unlimited). \\
 	\textbf{-B -V:} the B and V options limit the number of subject sequences for which any results whatsoever are reported, regardless of the number of HSPs or GSPs found. \\
@@ -387,8 +374,7 @@
 	$2" "$9" "$10}' notKnown.fa.spwb.ncbi > tmp
 	
 	awk '{if($4>$5) print $1"\t"$2"\t"$3"\t"$5"\t"$4"\t"$6"\t"$7"\t"$8"\t"$9" "$10" "$11
-	" "$12; else print $0}' tmp > notKnown.fa.spwb.gff
-	\end{lstlisting}
+	" "$12; else print $0}' tmp > notKnown.fa.spwb.gff \end{lstlisting}
 	
 	\noindent \textcolor{red}{2) Identify GB\_TE sequences}
 	\begin{lstlisting}[language=scala]
@@ -400,9 +386,7 @@
 	$2" "$9" "$10}' notKnown.fa.ervwb.ncbi > tmp
 	
 	awk '{if($4>$5) print $1"\t"$2"\t"$3"\t"$5"\t"$4"\t"$6"\t"$7"\t"$8"\t"$9" "$10" "$11
-	" "$12; else print $0}' tmp > notKnown.fa.tewb.gff
-	
-	\end{lstlisting}
+	" "$12; else print $0}' tmp > notKnown.fa.tewb.gff \end{lstlisting}
 	
 	\noindent \textcolor{red}{3) Identify potential retrovirus sequences}
 	\begin{lstlisting}[language=scala]
@@ -414,8 +398,7 @@
 	$2" "$9" "$10}' notKnown.fa.ervwb.ncbi > tmp
 	
 	awk '{if($4>$5) print $1"\t"$2"\t"$3"\t"$5"\t"$4"\t"$6"\t"$7"\t"$8"\t"$9" "$10" "$11
-	" "$12; else print $0}' tmp > notKnown.fa.ervwb.gff
-	\end{lstlisting}
+	" "$12; else print $0}' tmp > notKnown.fa.ervwb.gff \end{lstlisting}
 	
 	\noindent \textbf{-db:} BLAST database name \\
 	\textbf{-query:} Input file name \\
@@ -432,8 +415,7 @@
 	Another java program GetProteins.java will be used. It needs two input files: notKnown.fa, notKnown.fa.spwb.gff (Generated from previous step).
 	\begin{lstlisting}[language=java]
 	javac GetProteins.java
-	java GetProteins
-	\end{lstlisting}
+	java GetProteins \end{lstlisting}
 	You will get 2 output files: proteins.txt (a list of families that have been identified as proteins and the proteins they match);
 	notKnownNotProtein.fa (a fasta file of the families that were not classified).
 	
@@ -441,15 +423,13 @@
 	Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2\\
 	.
 	\begin{lstlisting}[language=bash]
-	phobos-linux-gcc4.1.2 -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos
-	\end{lstlisting}
+	phobos-linux-gcc4.1.2 -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos \end{lstlisting}
 	
 	\subsubsection{Identify the sequences that are SSRs from the phobos output.}
 	phobos output will be used to identify SSRs: notKnownNotProtein.phobos.
 	\begin{lstlisting}[language=bash]
 	javac IdentifySSRs.java
-	java IdentifySSRs
-	\end{lstlisting}
+	java IdentifySSRs \end{lstlisting}
 	Your output will be a file called: SSR.txt
 	
 	\subsubsection{Generate annotated repeat library.}
@@ -466,8 +446,7 @@
 	10. LA4v2-satellite.fa (you do not have this, or equivalent, as you didn't have any satellites, but leave the definition in-it will cause error messages, but will not stop the program or affect the results.)
 	\begin{lstlisting}[language=java]
 	javac GenerateAnnotatedLibrary.java
-	java GenerateAnnotatedLibrary
-	\end{lstlisting}
+	java GenerateAnnotatedLibrary \end{lstlisting}
 	This will generate a library called \textquotedblleft Human\_Repeat\_Library.fasta\textquotedblright, you can change this to whatever you want to call your library.
 	
 	\subsection{Benchmarks2}

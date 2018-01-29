@@ -173,7 +173,7 @@
 	go get github.com/biogo/examples/igor/gffer \end{lstlisting}
 	
 	\subsubsection{ Install CENSOR}
-	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs WU-BLAST/NCBI-BLAST and Bioperl installed.\\
+	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs WU-BLAST/NCBI-BLAST and BioPerl installed.\\
 	
 	\noindent CENSOR, along with instructions for installation, is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	
@@ -324,14 +324,18 @@
 	
 	\noindent First download uniprot protein dataset from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
 	
-	\noindent Then download GB\_TE dataset by using code (perl GB\_TE\_efetch.pl), the code can be found at \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes}). \\
+\noindent Then download GB\_TE dataset. First install EDirect from \href{https://www.ncbi.nlm.nih.gov/books/NBK179288/#chapter6.Getting_Started} {\color{blue}EDirect download} page.
+\noindent Then download the data (make sure your server is connected with internet): 
+
+\begin{lstlisting}[language=scala]
+esearch -db protein -query "reverse transcriptase or transposon or repetitive element or RNA-directed DNA polymerase or pol protein or non-LTR retrotransposon or mobile element or retroelement or polyprotein or retrovirus or (group-specific antigen gag) or polymerase (pol)" | efetch -format fasta > 260118_GB_TE.fa \end{lstlisting} 
 	
-	\noindent Retrovirus datasets can be downloaded from \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
+\noindent Retrovirus datasets can be downloaded from  \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
 	
-	\noindent Here is an example for WU-BLAST running:
+\noindent Here is an example for WU-BLAST running:
 	
-	\noindent \textcolor{red}{1) Identify potential protein sequences}
-	\begin{lstlisting}[language=scala]
+\noindent \textcolor{red}{1) Identify potential protein sequences}
+\begin{lstlisting}[language=scala]
 	gzip -d uniprot_sprot.fasta.gz
 	
 	xdformat -p -k uniprot_sprot.fasta

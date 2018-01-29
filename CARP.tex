@@ -289,7 +289,7 @@
 	\textbf{\textcolor{red}{Notes: For Java codes used here you may need to specify the directories where your input data is and where you want your output written. }}
 	
 	\subsubsection{Annotate consensus sequences with repeat families.}
-	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. 
+	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. You can download it from \href{http://www.girinst.org/repbase/update/browse.php?type=All&format=FASTA&autonomous=on&nonautonomous=on&simple=on&division=Vertebrata&letter=A}.
 	\begin{lstlisting}[language=scala]
 	find ./consensus -maxdepth 1 -name '[!.]*.fq' -print0 | xargs -r0 cat > ConsensusSequences.fa
 	

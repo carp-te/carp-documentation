@@ -322,7 +322,7 @@
 	\subsubsection{Filter sequences.}
 	This step contains three parts: 1) Identify potential protein sequences; 2) Identify GB\_TE sequences; 3) Identify retrovirus sequences. You can run each part separately in parallel to save time. From these three steps, you will get three output files for following steps: 1) notKnown.fa.spwb.gff, 2) notKnown.fa.tewb.gff, 3) notKnown.fa.ervwb.gff. \\
 	
-	\noindent First download uniprot protein dataset from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
+	\noindent First download uniprot protein dataset from \\ \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
 	
 \noindent Then download GB\_TE dataset. First install EDirect from \href{https://www.ncbi.nlm.nih.gov/books/NBK179288/#chapter6.Getting_Started} {\color{blue}EDirect download} page.
 \noindent Then download the data (make sure your server is connected with internet): 
@@ -330,7 +330,7 @@
 \begin{lstlisting}[language=scala]
 esearch -db protein -query "reverse transcriptase or transposon or repetitive element or RNA-directed DNA polymerase or pol protein or non-LTR retrotransposon or mobile element or retroelement or polyprotein or retrovirus or (group-specific antigen gag) or polymerase (pol)" | efetch -format fasta > 260118_GB_TE.fa \end{lstlisting} 
 	
-\noindent Retrovirus datasets can be downloaded from  \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
+\noindent Retrovirus datasets can be downloaded from  \\ \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
 	
 \noindent Here is an example for WU-BLAST running:
 	
@@ -356,7 +356,8 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	\begin{lstlisting}[language=scala]
 	xdformat -n -k all_retrovirus.fasta
 	
-	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.ervwb
+	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 
+	-cpus=32 > notKnown.fa.ervwb
 	
 	python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff \end{lstlisting}
 	

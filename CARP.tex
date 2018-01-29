@@ -177,7 +177,7 @@
 	
 	\noindent CENSOR, along with instructions for installation, is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	
-	\noindent WU-BLAST can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}WU-BLAST download}, NCBI-BLAST can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, BioPerl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}Bioperl download}.
+	\noindent WU-BLAST can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}WU-BLAST download}, NCBI-BLAST can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, BioPerl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}BioPerl download}.
 	\subsubsection{ Install MUSCLE}
 	Install MUSCLE to generate consensus sequences.
 	
@@ -289,7 +289,7 @@
 	\textbf{\textcolor{red}{Notes: For Java codes used here you may need to specify the directories where your input data is and where you want your output written. }}
 	
 	\subsubsection{Annotate consensus sequences with repeat families.}
-	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. You can download it from \href{http://www.girinst.org/repbase/update/browse.php?type=All&format=FASTA&autonomous=on&nonautonomous=on&simple=on&division=Vertebrata&letter=A}.
+	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. You can download it from \url{http://www.girinst.org/repbase/update/browse.php?type=All&format=FASTA&autonomous=on&nonautonomous=on&simple=on&division=Vertebrata&letter=A}.
 	\begin{lstlisting}[language=scala]
 	find ./consensus -maxdepth 1 -name '[!.]*.fq' -print0 | xargs -r0 cat > ConsensusSequences.fa
 	
@@ -426,8 +426,8 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	notKnownNotProtein.fa (a fasta file of the families that were not classified).
 	
 	\subsubsection{Check for simple sequence repeats (SSR).}
-	Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2\\
-	.
+	Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2.\\
+	
 	\begin{lstlisting}[language=bash]
 	phobos-linux-gcc4.1.2 -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos \end{lstlisting}
 	

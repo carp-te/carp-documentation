@@ -173,11 +173,11 @@
 	go get github.com/biogo/examples/igor/gffer \end{lstlisting}
 	
 	\subsubsection{ Install CENSOR}
-	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs wu-blast/NCBI-blast and Bioperl installed.\\
+	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs WU-BLAST/NCBI-BLAST and Bioperl installed.\\
 	
 	\noindent CENSOR, along with instructions for installation, is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	
-	wu-blast can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}wu-blast download}, NCBI-blast can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, bioperl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}Bioperl download}.
+	\noindent WU-BLAST can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}WU-BLAST download}, NCBI-BLAST can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, bioperl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}Bioperl download}.
 	\subsubsection{ Install MUSCLE}
 	Install MUSCLE to generate consensus sequences.
 	
@@ -294,11 +294,11 @@
 	find ./consensus -maxdepth 1 -name '[!.]*.fq' -print0 | xargs -r0 cat > ConsensusSequences.fa
 	
 	censor -bprm cpus=8 -lib ~/Vertebrates.fa -lib ~/our_known_reps_20130520.fasta ConsensusSequences.fa  \end{lstlisting}
-	For people that are not able to access wu-blast or prefer to use another aligner, CENSOR can also use NCBI BLAST instead (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), please find details for CENSOR installation at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
+	For people that are not able to access WU-BLAST or prefer to use another aligner, CENSOR can also use NCBI-BLAST instead (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), please find details for CENSOR installation at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	\begin{lstlisting}[language=bash]
 	censor.ncbi -lib Vertebrates.fa -lib our_known_reps_20130520.fasta ConsensusSequences.fa 
 	\end{lstlisting}
-	RepeatMasker can also be used to replace CENSOR in this step (RM-Blast was used as search engine).	
+	RepeatMasker can also be used to replace CENSOR in this step (RMBLAST was used as search engine).	
 	\begin{lstlisting}[language=scala]
 	cat Vertebrates.fa our_known_reps_20130520 > combined_library.fa
 	
@@ -328,7 +328,7 @@
 	
 	\noindent Retrovirus datasets can be downloaded from \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
 	
-	\noindent Here is an example for wu-blast running:
+	\noindent Here is an example for WU-BLAST running:
 	
 	\noindent \textcolor{red}{1) Identify potential protein sequences}
 	\begin{lstlisting}[language=scala]
@@ -363,7 +363,7 @@
 	
 	\pagebreak
 	
-	\noindent Again, in this section, if you cannot use wu-blast, ncbi-blast can be used instead, we tested different ncbi-blast parameters, to make the results are most consistent to the wu-blast results. \\
+	\noindent Again, in this section, if you cannot use WU-BLAST, NCBI-BLAST can be used instead, we tested different NCBI-BLAST parameters, to make the results are most consistent to the WU-BLAST results. \\
 	
 	\noindent \textcolor{red}{1) Identify potential protein sequences}
 	\begin{lstlisting}[language=scala]
@@ -403,8 +403,8 @@
 	
 	\noindent \textbf{-db:} BLAST database name \\
 	\textbf{-query:} Input file name \\
-	\textbf{-max\_hsps:} Set maximum number of HSPs per subject sequence to save for each query, ncbi-blast doesn't have gsps option, but we tested with hsps in wu-blast, the result remain almost the same \\
-	\textbf{-seg:} Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable), default wu-blast is off \\
+	\textbf{-max\_hsps:} Set maximum number of HSPs per subject sequence to save for each query, NCBI-BLAST doesn't have gsps option, but we tested with hsps in WU-BLAST, the result remain almost the same \\
+	\textbf{-seg:} Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable), default WU-BLAST is off \\
 	\textbf{-evalue:} Expectation value (E) threshold for saving hits \\
 	\textbf{-num\_threads:} Number of threads (CPUs) to use in the BLAST search \\
 	\textbf{-max\_target\_seqs:} Maximum number of aligned sequences to keep \\

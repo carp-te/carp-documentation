@@ -356,7 +356,7 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	\begin{lstlisting}[language=scala]
 	xdformat -n -k all_retrovirus.fasta
 	
-	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 
+	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 \
 	-cpus=32 > notKnown.fa.ervwb
 	
 	python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff \end{lstlisting}
@@ -398,7 +398,8 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	\begin{lstlisting}[language=scala]
 	makeblastdb -in all_retrovirus.fasta -dbtype nucl 
 	
-	tblastx -db all_retrovirus.fasta -query notKnown.fa -max_hsps 1 -seg no -evalue 0.00001 -num_threads 32 -max_target_seqs 1 -word_size 2 -outfmt 6 -out notKnown.fa.ervwb.ncbi
+	tblastx -db all_retrovirus.fasta -query notKnown.fa -max_hsps 1 -seg no \
+	-evalue 0.00001 -num_threads 32 -max_target_seqs 1 -word_size 2 -outfmt 6 -out notKnown.fa.ervwb.ncbi
 	
 	awk '{print $1"\t""blast""\t""hit""\t"$7"\t"$8"\t"$11"\t"".""\t"".""\t""Target sp|"
 	$2" "$9" "$10}' notKnown.fa.ervwb.ncbi > tmp

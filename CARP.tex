@@ -325,14 +325,14 @@
 	\noindent First download uniprot protein dataset from \\ \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
 	
 \noindent Then download GB\_TE dataset. First install EDirect from \href{https://www.ncbi.nlm.nih.gov/books/NBK179288/#chapter6.Getting_Started} {\color{blue}EDirect download} page.
-\noindent Then download the data (make sure your server is connected with internet): 
+\noindent Then download the data: 
 
 \begin{lstlisting}[language=scala]
 esearch -db protein -query "reverse transcriptase or transposon or repetitive element or RNA-directed DNA polymerase or pol protein or non-LTR retrotransposon or mobile element or retroelement or polyprotein or retrovirus or (group-specific antigen gag) or polymerase (pol)" | efetch -format fasta > 260118_GB_TE.fa \end{lstlisting} 
 	
 \noindent Retrovirus datasets can be downloaded from  \\ \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
 	
-\noindent Here is an example for WU-BLAST running:
+\noindent Here are examples for WU-BLAST running:
 	
 \noindent \textcolor{red}{1) Identify potential protein sequences}
 \begin{lstlisting}[language=scala]
@@ -368,7 +368,7 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	
 	\pagebreak
 	
-	\noindent Again, in this section, if you cannot use WU-BLAST, NCBI-BLAST can be used instead, we tested different NCBI-BLAST parameters, to make the results are most consistent to the WU-BLAST results. \\
+	\noindent If you wish to use WU-BLAST, NCBI-BLAST can be used instead, we tested different NCBI-BLAST parameters, to make the results as consistent as possible to the WU-BLAST results. See below for examples using NCBI-BLAST:\\
 	
 	\noindent \textcolor{red}{1) Identify potential protein sequences}
 	\begin{lstlisting}[language=scala]

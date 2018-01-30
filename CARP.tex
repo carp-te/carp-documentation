@@ -173,11 +173,11 @@
 	go get github.com/biogo/examples/igor/gffer \end{lstlisting}
 	
 	\subsubsection{ Install CENSOR}
-	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs wu-blast/NCBI-blast and Bioperl installed.\\
+	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs WU-BLAST/NCBI-BLAST and BioPerl installed.\\
 	
 	\noindent CENSOR, along with instructions for installation, is available at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	
-	wu-blast can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}wu-blast download}, NCBI-blast can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, bioperl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}Bioperl download}.
+	\noindent WU-BLAST can be downloaded at \href{https://www.advbiocomp.com/blast/obsolete/}{\color{blue}WU-BLAST download}, NCBI-BLAST can be downloaded at \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/}, BioPerl can be downloaded at \href{http://bioperl.org/INSTALL.html}{\color{blue}BioPerl download}.
 	\subsubsection{ Install MUSCLE}
 	Install MUSCLE to generate consensus sequences.
 	
@@ -283,22 +283,22 @@
 	Previous steps have generated repeat consensus sequences from the human genome, now we are going to annotate these repeat consensus sequences. \\
 	\textbf{\textcolor{red}{All the files used below can be found at \\
 			\href{<url>}(\url{https://data.mendeley.com/datasets/k88h5xnhcb/draft?a=d401233a-5af8-4879-81e8-c049b7133c8c})}}. \\
-	\textbf{\textcolor{red}{All the codes used below can be found at \\ \href{<url>}(\url{https://github.com/carp-te/carp-documentation/tree/master/code})}.} 
+	\textbf{\textcolor{red}{All the code used below can be found at \\ \href{<url>}(\url{https://github.com/carp-te/carp-documentation/tree/master/code})}.} 
 	
 	\subsection{Annotate consensus sequences}
-	\textbf{\textcolor{red}{Notes: For Java codes used here you may need to specify the directories where your input data is and where you want your output written. }}
+	\textbf{\textcolor{red}{Notes: For Java code used here you may need to specify the directories where your input data is and where you want your output written. }}
 	
 	\subsubsection{Annotate consensus sequences with repeat families.}
-	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. 
+	Use censor to annotate consensus sequences with the Repbase library. The Vertebrates.fa we use here is the Repbase vertebrates repeat libraries downloaded on 1st March, 2016. You can download it from \url{http://www.girinst.org/repbase/update/browse.php?type=All&format=FASTA&autonomous=on&nonautonomous=on&simple=on&division=Vertebrata&letter=A}.
 	\begin{lstlisting}[language=scala]
 	find ./consensus -maxdepth 1 -name '[!.]*.fq' -print0 | xargs -r0 cat > ConsensusSequences.fa
 	
 	censor -bprm cpus=8 -lib ~/Vertebrates.fa -lib ~/our_known_reps_20130520.fasta ConsensusSequences.fa  \end{lstlisting}
-	For people that are not able to access wu-blast or prefer to use another aligner, CENSOR can also use NCBI BLAST instead (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), please find details for CENSOR installation at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
+	For people that are not able to access WU-BLAST or prefer to use another aligner, CENSOR can also use NCBI-BLAST instead (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/), please find details for CENSOR installation at \href{http://www.girinst.org/downloads/software/censor/} {\color{blue}CENSOR download} page.
 	\begin{lstlisting}[language=bash]
 	censor.ncbi -lib Vertebrates.fa -lib our_known_reps_20130520.fasta ConsensusSequences.fa 
 	\end{lstlisting}
-	RepeatMasker can also be used to replace CENSOR in this step (RM-Blast was used as search engine).	
+	RepeatMasker can also be used to replace CENSOR in this step (RMBLAST was used as search engine).	
 	\begin{lstlisting}[language=scala]
 	cat Vertebrates.fa our_known_reps_20130520 > combined_library.fa
 	
@@ -322,16 +322,20 @@
 	\subsubsection{Filter sequences.}
 	This step contains three parts: 1) Identify potential protein sequences; 2) Identify GB\_TE sequences; 3) Identify retrovirus sequences. You can run each part separately in parallel to save time. From these three steps, you will get three output files for following steps: 1) notKnown.fa.spwb.gff, 2) notKnown.fa.tewb.gff, 3) notKnown.fa.ervwb.gff. \\
 	
-	\noindent First download uniprot protein dataset from \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
+	\noindent First download uniprot protein dataset from \\ \url{ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz}. \\
 	
-	\noindent Then download GB\_TE dataset by using code (perl GB\_TE\_efetch.pl), the code can be found at \href{<url>}(\url{https://github.com/luzengAdelaide/Biogo-document/tree/master/Codes}). \\
+\noindent Then download GB\_TE dataset. First install EDirect from \href{https://www.ncbi.nlm.nih.gov/books/NBK179288/#chapter6.Getting_Started} {\color{blue}EDirect download} page.
+\noindent Then download the data: 
+
+\begin{lstlisting}[language=scala]
+esearch -db protein -query "reverse transcriptase or transposon or repetitive element or RNA-directed DNA polymerase or pol protein or non-LTR retrotransposon or mobile element or retroelement or polyprotein or retrovirus or (group-specific antigen gag) or polymerase (pol)" | efetch -format fasta > 260118_GB_TE.fa \end{lstlisting} 
 	
-	\noindent Retrovirus datasets can be downloaded from \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
+\noindent Retrovirus datasets can be downloaded from  \\ \url{https://www.ncbi.nlm.nih.gov/genomes/GenomesGroup.cgi?taxid=11632}.\\
 	
-	\noindent Here is an example for wu-blast running:
+\noindent Here are examples for WU-BLAST running:
 	
-	\noindent \textcolor{red}{1) Identify potential protein sequences}
-	\begin{lstlisting}[language=scala]
+\noindent \textcolor{red}{1) Identify potential protein sequences}
+\begin{lstlisting}[language=scala]
 	gzip -d uniprot_sprot.fasta.gz
 	
 	xdformat -p -k uniprot_sprot.fasta
@@ -352,7 +356,8 @@
 	\begin{lstlisting}[language=scala]
 	xdformat -n -k all_retrovirus.fasta
 	
-	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 -cpus=32 > notKnown.fa.ervwb
+	tblastx ./BlastDB/all_retrovirus.fasta notKnown.fa -gspmax=1 -E 0.00001 -B 1 -V 1 
+	-cpus=32 > notKnown.fa.ervwb
 	
 	python ./report_run/wublastx2gff.py notKnown.fa.ervwb > notKnown.fa.ervwb.gff \end{lstlisting}
 	
@@ -363,7 +368,7 @@
 	
 	\pagebreak
 	
-	\noindent Again, in this section, if you cannot use wu-blast, ncbi-blast can be used instead, we tested different ncbi-blast parameters, to make the results are most consistent to the wu-blast results. \\
+	\noindent If you wish to use WU-BLAST, NCBI-BLAST can be used instead, we tested different NCBI-BLAST parameters, to make the results as consistent as possible to the WU-BLAST results. See below for examples using NCBI-BLAST:\\
 	
 	\noindent \textcolor{red}{1) Identify potential protein sequences}
 	\begin{lstlisting}[language=scala]
@@ -403,8 +408,8 @@
 	
 	\noindent \textbf{-db:} BLAST database name \\
 	\textbf{-query:} Input file name \\
-	\textbf{-max\_hsps:} Set maximum number of HSPs per subject sequence to save for each query, ncbi-blast doesn't have gsps option, but we tested with hsps in wu-blast, the result remain almost the same \\
-	\textbf{-seg:} Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable), default wu-blast is off \\
+	\textbf{-max\_hsps:} Set maximum number of HSPs per subject sequence to save for each query, NCBI-BLAST doesn't have gsps option, but we tested with hsps in WU-BLAST, the result remain almost the same \\
+	\textbf{-seg:} Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or 'no' to disable), default WU-BLAST is off \\
 	\textbf{-evalue:} Expectation value (E) threshold for saving hits \\
 	\textbf{-num\_threads:} Number of threads (CPUs) to use in the BLAST search \\
 	\textbf{-max\_target\_seqs:} Maximum number of aligned sequences to keep \\
@@ -421,8 +426,8 @@
 	notKnownNotProtein.fa (a fasta file of the families that were not classified).
 	
 	\subsubsection{Check for simple sequence repeats (SSR).}
-	Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2\\
-	.
+	Check for existence of SSR in the unknown sequences, using phobos. Phobos can be downloaded at \\ \href{<url>}(\url{http://www.ruhr-uni-bochum.de/ecoevo/cm/cm_phobos.htm}). We used executable: phobos-linux-gcc4.1.2.\\
+	
 	\begin{lstlisting}[language=bash]
 	phobos-linux-gcc4.1.2 -r 7 --outputFormat 0 --printRepeatSeqMode 0 notKnownNotProtein.fa > notKnownNotProtein.phobos \end{lstlisting}
 	
@@ -448,7 +453,7 @@
 	\begin{lstlisting}[language=java]
 	javac GenerateAnnotatedLibrary.java
 	java GenerateAnnotatedLibrary \end{lstlisting}
-	This will generate a library called \textquotedblleft Human\_Repeat\_Library.fasta\textquotedblright, you can change this to whatever you want to call your library.
+	This will generate a library called \textquotedblleft Human\_Repeat\_Library.fasta\textquotedblright, you can change rename this file to whatever you want.
 	
 	\subsection{Benchmarks2}
 	

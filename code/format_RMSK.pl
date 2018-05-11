@@ -2,15 +2,16 @@
 use strict;
 
 =head1 SYNOPSIS
-format_RMSK.pl <RMSKfile> > <output>
+format_RMSK.pl <RMSKfile.out/ori.out> > <output>
 =cut
 
 my ($filename) = @ARGV;
 open(IN,"$filename");
 
-# Change RepeatMasker output into CENSOR map similar results
+# Change RepeatMasker output into CENSOR map format
 while(<IN>){
     chomp;
+    next if ($_ eq "");
     my @data = split(" ",$_);
     if($data[8] eq '+'){
 	if ($data[11] =~ /\([\w]+\)/){

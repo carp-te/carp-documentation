@@ -389,7 +389,7 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	blastx -db GB_TE.new -query notKnown.fa -max_hsps 1 -seg no -evalue 0.00001 -num_threads 32 -max_target_seqs 1 -word_size 2 -outfmt 6 -out notKnown.fa.tewb.ncbi
 	
 	awk '{print $1"\t""blast""\t""hit""\t"$7"\t"$8"\t"$11"\t"".""\t"".""\t""Target sp|"
-	$2" "$9" "$10}' notKnown.fa.ervwb.ncbi > tmp
+	$2" "$9" "$10}' notKnown.fa.tewb.ncbi > tmp
 	
 	awk '{if($4>$5) print $1"\t"$2"\t"$3"\t"$5"\t"$4"\t"$6"\t"$7"\t"$8"\t"$9" "$10" "$11
 	" "$12; else print $0}' tmp > notKnown.fa.tewb.gff \end{lstlisting}

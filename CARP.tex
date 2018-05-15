@@ -495,4 +495,14 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	
 	\noindent Analysis run on a slurm machine with 4$\sim$16 cpus, and 8GB RAM, running Red Hat Linux.\\
 	{*} New Bearded dragon analysis used same bearded dragon genome, except it was run on a High Performance Computing machine with 32 cpus, running Red Hat Linux. \\
+	
+	\subsection{Annotate genomes with TE}
+	Annotate interested genomes with a combination of Repbase TE library and library generated from CARP
+		\begin{lstlisting}[language=scala]
+		censor -bprm cpus=8 -lib ~/Vertebrates.fa -lib Denovo_TE_Library.fasta hg19v37.mfa \end{lstlisting}
+	RepeatMasker can also be used to replace CENSOR in this step (RMBLAST was used as search engine).	
+	\begin{lstlisting}[language=scala]
+	cat Vertebrates.fa Denovo_TE_Library.fasta > combined_library2.fa
+	
+	RepeatMasker -pa 16 -a -nolow -norna -dir ./ -lib combine_library2.fa hg19v37.mfa \end{lstlisting}
 \end{document}

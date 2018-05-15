@@ -439,7 +439,12 @@ esearch -db protein -query "reverse transcriptase or transposon or repetitive el
 	\begin{lstlisting}[language=bash]
 	javac IdentifySSRs.java
 	java IdentifySSRs \end{lstlisting}
-	Your output will be a file called: SSR.txt
+	Your output will be a file called: SSR.txt \\
+	
+\noindent	{\color{red} Note:}  For GB\_TE or retrovirus data downloaded by using EDirect, please change the data format before feed into GenerateAnnotatedLibrary.java. Examples can be seen below: 
+	\begin{lstlisting}[language=bash]
+	perl -pi -e "s/^>/>gi|GBTE|sp|/g" GBTE.fa
+	sed -i 's/ /| /' GBTE.fa \end{lstlisting}
 	
 	\subsubsection{Generate annotated repeat library.}
 	There are ten input files that are required to generate a repeat library: \\

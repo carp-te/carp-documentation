@@ -306,9 +306,7 @@
 	
 	RepeatMasker -pa 16 -a -nolow -norna -dir ./ -lib combine_library.fa ConsensusSequences.fa
 	
-	perl format_RMSK.pl ConsensusSequences.fa > tmp 
-	
-	mv tmp ConsensusSequences.fa \end{lstlisting}
+	perl format_RMSK.pl ConsensusSequences.fa.out/ConsensusSequences.fa.ori.out > ConsensusSequences.fa.map \end{lstlisting}
 	The censor output usually contains 5 files: ConsensusSequences.fa.map, ConsensusSequences.fa.aln, ConsensusSequences.fa.found, ConsensusSequences.fa.idx, ConsensusSequences.fa.masked. 
 	
 	\subsubsection{Classify consensus sequences.}

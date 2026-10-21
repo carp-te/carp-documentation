@@ -76,14 +76,14 @@ public class ClassifyConsensusSequences {
 				if (line.length() > 0)
 					if (line.charAt(0) == '>') {
 						if (count > 0) {
-							lengths.put(id, new Integer(count));
+							lengths.put(id, Integer.valueOf(count));
 							count = 0;
 							}
 						st = new StringTokenizer(line);
 						id = st.nextToken().substring(1);
 						}
 					else count += line.length();
-			lengths.put(id, new Integer(count));
+			lengths.put(id, Integer.valueOf(count));
 			in.close();
 			}
 		catch (IOException ie) {ie.printStackTrace();}

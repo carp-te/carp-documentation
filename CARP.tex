@@ -166,11 +166,11 @@
 	\noindent Download and install krishna and igor packages from github. 
 	
 	\begin{lstlisting}[language=bash, columns=flexible]
-	go get -u github.com/biogo/examples/krishna
-	go get github.com/biogo/examples/krishna/matrix
-	go get github.com/biogo/examples/igor
-	go get github.com/biogo/examples/igor/seqer
-	go get github.com/biogo/examples/igor/gffer \end{lstlisting}
+	go install -u github.com/biogo/examples/krishna@lastest
+	go install -u github.com/biogo/examples/krishna/matrix@lastest
+	go install -u github.com/biogo/examples/igor@lastest
+	go install -u github.com/biogo/examples/igor/seqer@lastest
+	go install -u github.com/biogo/examples/igor/gffer@lastest \end{lstlisting}
 	
 	\subsubsection{ Install CENSOR}
 	Install censor to screen target genomes against a reference collection of repeats with masking symbols, as well as generating a report classifying all repeats found. CENSOR needs WU-BLAST/NCBI-BLAST and BioPerl installed.\\
@@ -205,7 +205,7 @@
 	
 	\begin{lstlisting}[language=bash]
 	cd /your/path/here/human 
-	matrix -threads=8 -krishnaflags="-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400" chr*.fa \end{lstlisting}
+	matrix -threads=8 -krishnaflags="-tmp=./ -threads=2 -log -filtid=0.94 -filtlen=400 -target=chr*.fa" chr*.fa \end{lstlisting}
 	
 	\noindent -tmp: store the temporary files generated from running krishna, you can specify your own directory. \\
 	-threads (matrix): number of concurrent krishna instances to run. (default 6) \\
@@ -216,7 +216,7 @@
 	\noindent If genome sequence files are very big and consist of multiple contigs or scaffolds ($>$200MB), you can use bundle to split them into smaller files. For example,
 	
 	\begin{lstlisting}[language=bash]
-	go get github.com/biogo/examples/bundle
+	go install github.com/biogo/examples/bundle@latest
 	bundle -bundle 80000000 -in seq.fa \end{lstlisting}
 	
 	\noindent -bundle: specifies the total sequence length in a bundle. (default 20000000, 20MB).\\
